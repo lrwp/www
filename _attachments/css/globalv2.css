@@ -81,6 +81,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006d49', endColorstr='#004c2f',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     width:120px;
     text-align:center;
+    text-transform: uppercase;
     padding-bottom:5px;
     color:#fff;
     float:right;

@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+<head lang="en-us">
+	<meta charset="utf-8">
+    <title>Little River Wetlands Project</title>
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"/>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/globalv2.css"/>
+    <link rel="stylesheet" href="css/index.css"/>
+</head>
+<body>
+<div class="container">
+
+    <!-- Banner -->
+    <div class="row">
+        <div id="header" class="span12">
+            <a id="join" href="joindonate.php">Join/Donate</a>
+            <img src="img/logo.png" alt="LRWP Frog Logo"/>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="row">
+        <div class="navbar navbar-inverse span12">
+            <div class="navbar-inner">
+                <ul class="nav">
+                    <li class="dropdown">
+                        <a href="about.php" role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">About Us</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="menuitem"><a href="about.php?video=stop#mission">Our Mission</a></li>
+                            <li role="menuitem"><a href="boardsstaff.php">Boards &amp; Staff</a></li>
+                            <li role="menuitem"><a href="committees.php">Committees</a></li>
+                            <li role="menuitem"><a href="communitypartners.php">Community Partners</a></li>
+                            <li role="menuitem"><a href="news.php">News &amp; Updates</a></li>
+                            <li role="menuitem" class="divider"></li>
+                            <li role="menuitem"><a href="#"><i class="icon-envelope"></i> Contact Us</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="eaglemarsh.php" role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">Our Preserves</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="menuitem"><a href="eaglemarsh.php">Eagle Marsh</a></li>
+                            <li role="menuitem"><a href="arrowhead.php">Arrowhead Preserves</a></li>
+                            <li role="menuitem"><a href="littleriverlanding.php">Little River Landing</a></li>
+                            <li role="menuitem"><a href="habitats.php">Habitats &amp; Wildlife</a></li>
+                            <li role="menuitem" class="divider"></li>
+                            <li role="menuitem"><a href="trailmaps.php"><i class="icon-map-marker"></i> Trail Maps &amp; Directions</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="joindonate.php" role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">Join/Donate</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="menuitem"><a href="donate_honor.php">Honor a Loved One</a></li>
+                            <li role="menuitem"><a href="legacy.php">Leave a Legacy</a></li>
+                            <li role="menuitem"><a href="communitypartners.php">Community Partners</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="volunteer.php" role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">Volunteer</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="menuitem"><a href="volunteer.php">Opportunities</a></li>
+                            <li role="menuitem"><a href="application.php">Application</a></li>
+                            <li role="menuitem" class="divider"></li>
+                            <li role="menuitem"><a href="#"><i class="icon-envelope"></i> Contact Us</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="events.php" role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">Events/Programs</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="menuitem"><a href="events.php">Upcoming Events</a></li>
+                            <li role="menuitem"><a href="volunteer.php">Volunteer Events</a></li>
+                            <li role="menuitem"><a href="special_events.php">Special Events</a></li>
+                            <li role="menuitem" class="divider"></li>
+                            <li role="menuitem"><a href="#"><i class="icon-envelope"></i> Contact Us</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="wetlandsinfo.php" role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">Wetlands Info</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="menuitem"><a href="wetlandsinfo.php">How Wetlands Work</a></li>
+                            <li role="menuitem"><a href="habitats.php">Habitats &amp; Wildlife</a></li>
+                            <li role="menuitem"><a href="conserve.php">Conserve Land</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="ourvalley.php" role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">Our Valley</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="menuitem"><a href="history.php">History</a></li>
+                            <li role="menuitem"><a href="great_marsh.php">The Great Marsh</a></li>
+                            <li role="menuitem"><a href="geo.php">Geology</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form id="search" class="navbar-search pull-right input-append">
+                  <input type="text" placeholder="Search...">
+                  <button class="btn" type="button"><i class="icon-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="span8">
+
+            <!-- Carousel -->
+            <div id="slideshow" class="carousel slide" data-interval="2500">
+                <div class="carousel-inner">
+                    {{slide}}
+                    <div class="{{active}} item">
+                        <img src="img/snow.jpg" alt=""/>
+                        <div class="carousel-caption">
+                            <h4>{{title}}</h4>
+                            <p>{{{content}}}</p>
+                        </div>
+                    </div>
+                    {{/slide}}
+                </div>
+                <div class="carousel-control-overlay">
+                    <a class="carousel-control right" href="#slideshow" data-slide="next">&rsaquo;</a>
+                </div>
+            </div>
+
+            <!-- Events -->
+            <div id="events">
+                <h3>Upcoming Events</h3>
+                {{#events}}
+                    <h4>{{title}}</h4>
+                    <b>{{date}}</b>
+                    <div>{{{content}}}</div>
+                {{/events}}
+            </div>
+
+        </div>
+
+        <div class="span4">
+
+            <!-- News -->
+            <div id="news">
+                <h3>What's New at LRWP</h3>
+                <ul class="nav nav-tabs nav-stacked span4">
+                    {{#brief}}
+                        <li><a href="news.php#id-{{id}}">{{title}}</a></li>
+                    {{/brief}}
+                    {{#news}}
+                        <li><a href="news.php#id-{{id}}">{{title}}</a></li>
+                    {{/news}}
+                </ul>
+            </div>
+
+            <!-- Wildlife Spotlights -->
+            <div id="spotlight">
+
+                {{fauna}}
+                    <img src="img/wildlife/vole_microtussp.jpg" alt="{{common}}"/>
+                    <div><b>{{common}}</b> <i>({{latin}})</i></div>
+                    <p>
+                        {{{content}}}
+                    </p>
+                {{/fauna}}
+
+                {{flora}}
+                    <img src="img/wildlife/buroak_quercusmacrocarpa.jpg" alt="{{common}}"/>
+                    <div><b>{{common}}</b> <i>({{latin}})</i></div>
+                    <p>
+                        {{{content}}}
+                    </p>
+                {{/flora}}
+
+            </div>
+
+            <a id="eNewsLink" href="http://lrwp.us4.list-manage.com/subscribe?u=4d14a5e76dce4b1131c92d50b&id=6959d5cb0b" role="button" type="button" class="btn btn-info btn-full"  data-toggle="modal">
+                <i class="icon-bullhorn"></i> Sign up for our monthly E-Newsletter
+            </a>
+
+            <div class="fb-like-box" data-href="http://www.facebook.com/LittleRiverWetlands" data-width="326" data-show-faces="true" data-stream="true" data-header="true"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="footer">
+    &copy; 2013 Little River Wetlands Project
+</div>
+<script src="js/jquery-1.8.2.min.js"></script>
+<script src="js/bootstrap-custom.js"></script>
+<script src="js/index.js"></script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "http://connect.facebook.net/en_US/all.js#xfbml=1&appId=329565090434498";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</body>
+</html>
