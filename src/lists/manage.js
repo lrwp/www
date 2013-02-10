@@ -1,40 +1,34 @@
-function(doc, req) {   
-    var Mustache = require('lib/mustache');
+function(doc, req) {
 
-    provides('html', function() {
+    'use strict';
+  
+    provides('html', function () {
         var
-            schemas = ['brief', 'news', 'slide', 'event', 'page'],
-            row, i,
-            group = {},
+            Mustache = require('lib/Mustache'),
+            ea,
+            schema = {},
             view = {
                 schema: []
             };
 
-        while (row = getRow()) {
-            if (!group.hasOwnProperty(row.key)) {
-                group[row.key] = {
-                    name: row.key,
-                    docs: []
-                };
-            }
-            group[row.key].docs.push(row.value);
-            group[row.key].hasDocs = true;
+        // Create an empty structure for each schema in the ddoc
+        for (ea in this.schema) {
+            schema[ea] = {name: ea, docs: [], hasDocs: false};
         }
 
-        for (i in group) {
-            if (schemas.indexOf(i) !== -1) {
-                schemas.splice(schemas.indexOf(i), 1);
-            }
-            view.schema.push(group[i]);
+        // Loop through all documents in view
+        while (ea = getRow()) {
+            ea.value.id = ea.id;
+            schema[ea.key].docs.push(ea.value);
+            schema[ea.key].hasDocs = true;
         }
 
-        // add empty objects for any empty schemas
-        if (schemas.length) {
-            for (i in schemas) {
-                view.schema.push({name: schemas[i], docs: [], hasDocs: false});
-            }
+        // Translate to Mustache
+        for (ea in schema) {
+            view.schema.push(schema[ea]);
         }
 
-        return Mustache.to_html(this.templates.manage, view);
+        // Render the view
+        return Mustache.to_html(this.templates.layout.manage, view);
     });
 }

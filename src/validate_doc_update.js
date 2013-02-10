@@ -5,7 +5,7 @@ function(newDoc, oldDoc, userCtx) {
         throw({forbidden : 'You must be logged in'});
     }
 
-    // Need to be an admin or a member of this db
+    // Check Roles
     if (userCtx.roles.indexOf('_admin') === -1 && userCtx.roles.indexOf('lrwp') === -1) {
         throw({forbidden: 'You are not a member of this database.'});
     }
@@ -20,7 +20,7 @@ function(newDoc, oldDoc, userCtx) {
         throw({forbidden : 'The document schema is missing.'});
     }
 
-    // ...and that schema must exist in the couchapp
+    // ...and that schema must exist
     if (!this.schema.hasOwnProperty(newDoc.schema)) {
         throw({forbidden : 'There is no schema for: ' + newDoc.schema});
     }

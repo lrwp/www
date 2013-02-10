@@ -18,6 +18,7 @@ Git
 jQuery
 jQuery-ui
 Bootstrap
+Mustache
 JSV
 
 // Quality Assurance:

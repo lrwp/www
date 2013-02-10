@@ -25,11 +25,11 @@
             "required": true
         },
         "created": {
-            "type": "integer",
+            "type": "string",
             "required": true
         },
         "modified": {
-            "type": "integer"
+            "type": "string"
         },
         "author": {
             "type": "string",

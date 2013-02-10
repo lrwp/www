@@ -1,7 +1,9 @@
-function(doc){
-    var schemas = ['brief', 'news', 'slide', 'event', 'page'];  
-    if (doc.schema && schemas.indexOf(doc.schema) !== -1) {
+function(doc) {
+    'use strict';
+
+    if (doc.schema) {
         emit(doc.schema, {
+            schema: doc.schema,
             title: doc.title,
             created: new Date(doc.created),
             author: doc.author

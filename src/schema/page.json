@@ -20,6 +20,9 @@
             "type": "string",
             "required": true
         },
+        "layout": {
+            "type": "string"
+        },
         "content": {
             "type": "string",
             "required": true
