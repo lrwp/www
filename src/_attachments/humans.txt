@@ -1,0 +1,26 @@
+// Team
+Web Developer: Travis Paul
+Contact: Tr@visPaul.me
+From: Fort Wayne, Indiana
+
+// Powered by:
+Fedora
+Apache CouchDB
+Nginx
+
+// Built with:
+Erica
+Tmux
+Vim
+Git
+
+// Using:
+jQuery
+jQuery-ui
+Bootstrap
+JSV
+
+// Quality Assurance:
+JSLINT
+W3C Validator
+YSlow

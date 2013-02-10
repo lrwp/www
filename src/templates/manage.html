@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head lang="en-us">
+	<meta charset="utf-8">
+    <title>Little River Wetlands Project | Manage</title>
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"/>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/jquery-ui-1.10.0.custom.css"/>
+    <link rel="stylesheet" href="css/globalv2.css"/>
+    <link rel="stylesheet" href="css/manage.css"/>
+</head>
+<body>
+<div class="container">
+
+    <!-- Navigation -->
+    <div id="nav" class="row hidden">
+        <div class="navbar navbar-inverse span12">
+            <div class="navbar-inner">
+                <a class="brand" href="/">LRWP</a>
+                <ul class="nav">
+                    {{#schema}}
+                        <li class="dropdown">
+                            <a role="button" class="dropdown-toggle dropdown-link schema-name" data-toggle="dropdown">{{name}}</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="menuitem">
+                                    <a data-schema="{{name}}" class="schema-new">
+                                        <i class="icon-plus-sign"></i> 
+                                        Create a new <span class="schema-name">{{name}}</span>
+                                    </a>
+                                </li>
+                                {{#hasDocs}}
+                                    <li role="menuitem" class="divider"></li>
+                                {{/hasDocs}}
+                                {{#docs}}
+                                    <li role="menuitem">
+                                        <a title="Created {{created}} by {{author}}" data-id="{{id}}">{{title}}</a>
+                                    </li>
+                                {{/docs}}
+                            </ul>
+                        </li>
+                    {{/schema}}
+                </ul>
+                <ul class="nav pull-right">
+                    <li class="dropdown pull-right">
+                        <a role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">
+                            <i class="icon-user"></i> <span id="user">Username</span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="menuitem">
+                                <a id="logout">
+                                    <i class="icon-off"></i> 
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+         </div>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <div class="container">
+        <div class="row">
+            <form class="hidden span12">
+                <fieldset id="schema-form"></fieldset>
+                <button class="btn btn-primary pull-right">Save</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<!-- Login Modal -->
+<form id="login" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" method="post" action="_session/?next=/manage">
+    <div class="modal-header">
+        <h3><i class="icon-lock"></i> Authentication Required</h3>
+    </div>
+    <div class="modal-body">
+        <div class="control-group">
+            <label class="control-label" for="username">Username</label>
+            <div class="controls">
+                <input type="text" class="input-xlarge" name="name" id="username" placeholder="Username">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password">Password</label>
+            <div class="controls">
+                <input class="input-xlarge" type="password" name="password" id="password" placeholder="Password">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary">Login</button>
+    </div>
+</form>
+
+
+<script src="js/jquery-1.8.2.min.js"></script>
+<script src="js/bootstrap-custom.js"></script>
+<script src="js/jquery-ui-1.10.0.custom.min.js"></script>
+<script src="js/mustache.js"></script>
+<script src="js/manage.js"></script>
+</body>
+</html>

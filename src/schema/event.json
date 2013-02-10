@@ -1,0 +1,60 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "_id": {
+            "type": "string",
+            "required": true
+        },
+        "_rev": {
+            "type": "string"
+        },
+        "_revisions":{
+            "type": "object"
+        },
+        "schema": {
+            "type": "string",
+            "required": true
+        },
+        "title": {
+            "type": "string",
+            "required": true
+        },
+        "content": {
+            "type": "string",
+            "required": true
+        },
+        "start": {
+            "type": "string",
+            "required": true
+        },
+        "end": {
+            "type": "string",
+            "required": true
+        },
+        "location": {
+            "type": "string"
+        },
+         "format": {
+            "type": "string"
+        },
+        "custom": {
+            "type": "string"
+        },
+        "category": {
+            "type": "string",
+            "required": true
+        },
+        "created": {
+            "type": "string",
+            "required": true
+        },
+        "modified": {
+            "type": "string"
+        },
+        "author": {
+            "type": "string",
+            "required": true
+        }
+    }
+}

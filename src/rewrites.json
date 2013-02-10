@@ -1,0 +1,16 @@
+[{
+    "from": "",
+    "to": "index.html"
+},
+{
+    "from": "api/*",
+    "to": "../../*"
+},
+{
+    "from": "manage",
+    "to": "_list/manage/all-by-schema"
+},
+{
+    "from": "*",
+    "to": "*"
+}]

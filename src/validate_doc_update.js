@@ -1,8 +1,13 @@
 function(newDoc, oldDoc, userCtx) {
 
     // Require Authentication
-    if(!userCtx.name) {
+    if (!userCtx.name) {
         throw({forbidden : 'You must be logged in'});
+    }
+
+    // Need to be an admin or a member of this db
+    if (userCtx.roles.indexOf('_admin') === -1 && userCtx.roles.indexOf('lrwp') === -1) {
+        throw({forbidden: 'You are not a member of this database.'});
     }
 
     // Don't validate documents being deleted
@@ -20,7 +25,6 @@ function(newDoc, oldDoc, userCtx) {
         throw({forbidden : 'There is no schema for: ' + newDoc.schema});
     }
 
-    // Comment this out if you are throwing an admin party.
     // This check simply enforces that the author is who they claim to be
     if (userCtx.name !== newDoc.author) {
         throw({forbidden: 'Author must be the current user.'});
