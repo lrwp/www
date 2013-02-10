@@ -79,7 +79,7 @@
             var
                 self = SchemaHelper,
                 $ul = $(document.createElement('ul')),
-                method = instance ? 'Create a new ' : 'Edit ';
+                method = instance ? 'Edit ' : 'Create ';
 
             self.emptyForm();
 
