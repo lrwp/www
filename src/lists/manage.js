@@ -13,14 +13,13 @@ function(doc, req) {
 
         // Create an empty structure for each schema in the ddoc
         for (ea in this.schema) {
-            schema[ea] = {name: ea, docs: [], hasDocs: false};
+            schema[ea] = {name: ea, docs: []};
         }
 
         // Loop through all documents in view
         while (ea = getRow()) {
             ea.value.id = ea.id;
             schema[ea.key].docs.push(ea.value);
-            schema[ea.key].hasDocs = true;
         }
 
         // Translate to Mustache

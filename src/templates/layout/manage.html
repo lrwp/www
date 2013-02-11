@@ -21,16 +21,14 @@
                     {{#schema}}
                         <li class="dropdown">
                             <a role="button" class="dropdown-toggle dropdown-link schema-name" data-toggle="dropdown">{{name}}</a>
-                            <ul class="dropdown-menu" role="menu">
+                            <ul class="dropdown-menu schema-actions" role="menu">
                                 <li role="menuitem">
                                     <a data-schema="{{name}}" class="schema-new">
                                         <i class="icon-plus-sign"></i> 
                                         Create a new <span class="schema-name">{{name}}</span>
                                     </a>
                                 </li>
-                                {{#hasDocs}}
-                                    <li role="menuitem" class="divider" class="doclist" data-schema="{{schema}}">test</li>
-                                {{/hasDocs}}
+                                <li role="menuitem" class="divider doclist" data-schema="{{name}}"></li>
                                 {{#docs}}
                                     <li role="menuitem">
                                         <a data-schema="{{schema}}" class="schema-edit" title="Created {{created}} by {{author}}" id="{{id}}">

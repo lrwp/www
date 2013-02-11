@@ -64,8 +64,12 @@
                 type: 'PUT',
                 dataType: 'json',
                 success: function (response) {
-                    // updae revision
+                    // update revision on form
                     self.options.$form.find('[name=_rev]').val(response.rev);
+                    
+                    // attach schema
+                    response.schema = obj.schema;
+
                     callback(response);
                 },
                 error: function (e) {

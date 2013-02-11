@@ -4,7 +4,7 @@ $(function (){
         schemaList = null,
         $new = $('.schema-new'),
         $form = $('#schema-form'),
-        $edit = $('.schema-edit'),
+        $edit = $('.schema-actions'),
         $nav = $('#nav'),
         $login = $('#login'),
         $user = $('#user'),
@@ -19,8 +19,16 @@ $(function (){
                 callback();
             }); 
         },
+        docListTpl = '<li role="menuitem"><a data-schema="{{schema}}" class="schema-edit" title="Created {{created}} by {{author}}" id="{{id}}">{{title}}</a></li>',
         updateDocs = function (schema) {
-            
+           $.getJSON('_view/all-by-schema?key="'+schema+'"', function (response) {
+                var i, $doclist = $('.doclist[data-schema='+schema+']');
+                $doclist.nextAll('li').remove();
+                for (i in response.rows) {
+                    response.rows[i].value.id = response.rows[i].id;
+                    $doclist.parent().append(Mustache.render(docListTpl, response.rows[i].value));
+                }
+           }); 
         };
 
     SchemaHelper.options = {
@@ -71,6 +79,7 @@ $(function (){
                 if (response.error) {
                     alert('Error ' + response.error +': '+ response.reason);
                 } else {
+                    updateDocs(response.schema);
                     $save.popover({
                         placement: 'top',
                         title: 'Ok',
@@ -107,7 +116,7 @@ $(function (){
         });
     });
 
-    $edit.click(function () {
+    $edit.on('click', '.schema-edit', function () {
         var $this = $(this);
         $.getJSON('/api/' + this.id, function(response){
             SchemaHelper.toForm(schemaList[response.schema], response.schema, response); 
@@ -120,6 +129,7 @@ $(function (){
                 url: 'api/' + $form.find('[name=_id]').val() + '?rev=' + $form.find('[name=_rev]').val(),
                 type: 'DELETE',
                 success: function () {
+                    updateDocs($form.find('[name=schema]').val());
                     SchemaHelper.emptyForm();
                 },
                 error: function(response) {
