@@ -18,15 +18,18 @@
         },
         "title": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Headline of news brief, will be shown on the homepage and above content."
         },
         "content": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Main content of the news brief, will be shown on the news and updates page."
         },
         "created": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "News briefs are sorted ascending by create date. This date is also shown on the news and updates page."
         },
         "modified": {
             "type": "string"

@@ -11,6 +11,7 @@ $(function (){
         $logout = $('#logout'),
         $save = $('#save'),
         $delete = $('#delete'),
+        $attach = $('#attach'),
         userCtx,
         ids = [],
         getIds = function(callback) {
@@ -35,6 +36,14 @@ $(function (){
         $form: $form,
         $delete: $delete,
         $save: $save,
+        hooks: {
+            slide: {
+                postRender: function($form, instance) {
+                    // render a view of the photo
+                    console.log($form, instance);
+                }
+            }
+        },
         map : {
             _id: {
                 tpl: SchemaHelper.defaults.hidden.tpl,
@@ -51,8 +60,25 @@ $(function (){
             _revisions: {
                 tpl: null
             },
+            _attachments: {
+                tpl: '<li><label>Image</label> <input name="{{name}}" type="hidden"/> {{#_attachments}}{{/_attachments}} <button class="btn uploader" type="button">Upload</button></li>',
+                render: function ($self, value) {
+                    if (value) {
+                        console.log(value);
+                        $self.val(JSON.stringify(value));
+                    } else {
+                        $self.val('{}');
+                    }
+                },
+                submit: function($self) {
+                    return JSON.parse($self.val());
+                }
+            },
+            title: {
+                tpl: '<li><label>{{name}}</label> <input class="input-xxlarge" type="text" name="{{name}}" value="{{value}}" {{required}} title="{{description}}"/></li>',
+            },
             content: {
-                tpl: '<li class="wysiwyg"><label>{{name}}</label> <textarea name="{{name}}" {{required}}>{{value}}</textarea></li>',
+                tpl: '<li class="wysiwyg"><label title="{{description}}">{{name}}</label> <textarea name="{{name}}" {{required}}>{{value}}</textarea></li>',
                 render: function ($self) {
                     CKEDITOR.replace($self[0]);
                 },
@@ -70,6 +96,8 @@ $(function (){
                 }
             },
             created: SchemaHelper.defaults.date,
+            start: SchemaHelper.defaults.date,
+            end: SchemaHelper.defaults.date,
             modified: {
                 tpl: SchemaHelper.defaults.hidden.tpl, 
                 submit: function ($self) {
@@ -155,6 +183,11 @@ $(function (){
 
     $save.click(function(){
         $form.parent().submit();
+    });
+
+    $form.on('click', '.uploader', function() {
+        console.log(this);
+        $attach.modal();
     });
 
     $.getJSON('_session', function(response) {

@@ -12,6 +12,9 @@
         "_revisions":{
             "type": "object"
         },
+        "_attachments": {
+            "type": "object"
+        },
         "schema": {
             "type": "string",
             "required": true
@@ -21,8 +24,7 @@
             "required": true
         },
         "link": {
-            "type": "string",
-            "required": true
+            "type": "string"
         },
         "content": {
             "type": "string",

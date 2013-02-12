@@ -18,15 +18,18 @@
         },
         "title": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Headline of the news article, displayed on the homepage and above the content.",
         },
         "content": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Main content for news article, only shown on the news and updates page."
         },
         "created": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "News articles are sorted ascending by create date."
         },
         "modified": {
             "type": "string"

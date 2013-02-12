@@ -18,34 +18,37 @@
         },
         "title": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Headline for event, shown above the start and end times."
         },
-        "content": {
+       "category": {
             "type": "string",
             "required": true
         },
         "start": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Date and time the event starts."
         },
         "end": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Date and time the event ends. After this date, the event will be removed from the website."
         },
-        "location": {
-            "type": "string"
-        },
-         "format": {
-            "type": "string"
-        },
-        "custom": {
-            "type": "string"
-        },
-        "category": {
+         "custom": {
             "type": "string",
-            "required": true
+            "description": "A custom string to use for the display date instead of '<start date> from <start time>to <end time>'"
         },
-        "created": {
+        "content": {
+            "type": "string",
+            "required": true,
+            "description": "Description of event, shown below the title and date."
+        },
+       "location": {
+            "type": "string",
+            "description": "Location of the event."
+        },
+       "created": {
             "type": "string",
             "required": true
         },

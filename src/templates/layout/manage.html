@@ -24,7 +24,7 @@
                             <li role="menuitem">
                                 <a data-schema="{{name}}" class="schema-new">
                                     <i class="icon-plus-sign"></i> 
-                                    Create a new <span class="schema-name">{{name}}</span>
+                                    Create <span class="schema-name">{{name}}</span>
                                 </a>
                             </li>
                             <li role="menuitem" class="divider doclist" data-schema="{{name}}"></li>
@@ -97,6 +97,26 @@
         <button class="btn btn-primary">Login</button>
     </div>
 </form>
+
+<!-- Attachment  Modal -->
+<form id="attach" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" method="post" action="">
+    <div class="modal-header">
+        <h3><i class="icon-file"></i> Upload Attachment</h3>
+    </div>
+    <div class="modal-body">
+        <div class="control-group">
+            <label class="control-label" for="attachment">File</label>
+            <div class="controls">
+                <input type="file"i/>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary">Upload</button>
+    </div>
+</form>
+
+
 <script src="/js/jquery-1.8.2.min.js"></script>
 <script src="/js/bootstrap-custom.js"></script>
 <script src="/js/jquery-ui-1.10.0.custom.min.js"></script>

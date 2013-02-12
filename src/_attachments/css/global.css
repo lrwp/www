@@ -2,6 +2,10 @@ body {
     background-image: url(../img/bg0.png);
 }
 
+.hidden {
+    display:none;
+}
+
 /* bootstrap ovverides */
 .navbar-inverse .navbar-inner {
     border-color: #005935;

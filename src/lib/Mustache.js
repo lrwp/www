@@ -1,315 +1,535 @@
-/*
-  Shameless port of http://github.com/defunkt/mustache
-  by Jan Lehnardt <jan@apache.org>, 
-     Alexander Lang <alex@upstream-berlin.com>,
-     Sebastian Cohnen <sebastian.cohnen@googlemail.com>
+/*!
+ * mustache.js - Logic-less {{mustache}} templates with JavaScript
+ * http://github.com/janl/mustache.js
+ */
 
-  Thanks @defunkt for the awesome code.
+/*global define: false*/
 
-  See http://github.com/defunkt/mustache for more info.
-*/
+(function (root, factory) {
+  if (typeof exports === "object" && exports) {
+    module.exports = factory; // CommonJS
+  } else if (typeof define === "function" && define.amd) {
+    define(factory); // AMD
+  } else {
+    root.Mustache = factory; // <script>
+  }
+}(this, (function () {
 
-var Mustache = function() {
-  var Renderer = function() {};
+  var exports = {};
 
-  Renderer.prototype = {
-    otag: "{{",
-    ctag: "}}",
-    pragmas: {},
-    buffer: [],
-    pragmas_parsed: false,
+  exports.name = "mustache.js";
+  exports.version = "0.7.2";
+  exports.tags = ["{{", "}}"];
 
-    render: function(template, context, partials, in_recursion) {
-      // fail fast
-      if(template.indexOf(this.otag) == -1) {
-        if(in_recursion) {
-          return template;
-        } else {
-          this.send(template);
-        }
-      }
+  exports.Scanner = Scanner;
+  exports.Context = Context;
+  exports.Writer = Writer;
 
-      if(!in_recursion) {
-        this.buffer = [];
-      }
+  var whiteRe = /\s*/;
+  var spaceRe = /\s+/;
+  var nonSpaceRe = /\S/;
+  var eqRe = /\s*=/;
+  var curlyRe = /\s*\}/;
+  var tagRe = /#|\^|\/|>|\{|&|=|!/;
 
-      if(!this.pragmas_parsed) {
-        template = this.render_pragmas(template);
-      }
-      var html = this.render_section(template, context, partials);
-      if(in_recursion) {
-        return this.render_tags(html, context, partials, in_recursion);
-      }
+  var _test = RegExp.prototype.test;
+  var _toString = Object.prototype.toString;
 
-      this.render_tags(html, context, partials, in_recursion);
-    },
+  // Workaround for https://issues.apache.org/jira/browse/COUCHDB-577
+  // See https://github.com/janl/mustache.js/issues/189
+  function testRe(re, string) {
+    return _test.call(re, string);
+  }
 
-    /*
-      Sends parsed lines
-    */
-    send: function(line) {
-      if(line != "") {
-        this.buffer.push(line);
-      }
-    },
+  function isWhitespace(string) {
+    return !testRe(nonSpaceRe, string);
+  }
 
-    /*
-      Looks for %PRAGMAS
-    */
-    render_pragmas: function(template) {
-      this.pragmas_parsed = true;
-      // no pragmas
-      if(template.indexOf(this.otag + "%") == -1) {
-        return template;
-      }
+  var isArray = Array.isArray || function (obj) {
+    return _toString.call(obj) === '[object Array]';
+  };
 
-      var that = this;
-      var regex = new RegExp(this.otag + "%([\\w_-]+) ?([\\w]+=[\\w]+)?"
-        + this.ctag);
-      return template.replace(regex, function(match, pragma, options) {
-        that.pragmas[pragma] = {};
-        if(options) {
-          var opts = options.split("=");
-          that.pragmas[pragma][opts[0]] = opts[1];
-        }
-        return "";
-        // ignore unknown pragmas silently
-      });
-    },
+  function escapeRe(string) {
+    return string.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
+  }
 
-    /*
-      Tries to find a partial in the global scope and render it
-    */
-    render_partial: function(name, context, partials) {
-      if(typeof(context[name]) != "object") {
-        throw({message: "subcontext for '" + name + "' is not an object"});
-      }
-      if(!partials || !partials[name]) {
-        throw({message: "unknown_partial '" + name + "'"});
-      }
-      return this.render(partials[name], context[name], partials, true);
-    },
+  var entityMap = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': '&quot;',
+    "'": '&#39;',
+    "/": '&#x2F;'
+  };
 
-    /*
-      Renders boolean and enumerable sections
-    */
-    render_section: function(template, context, partials) {
-      if(template.indexOf(this.otag + "#") == -1) {
-        return template;
-      }
-      var that = this;
-      // CSW - Added "+?" so it finds the tighest bound, not the widest
-      var regex = new RegExp(this.otag + "\\#(.+)" + this.ctag +
-              "\\s*([\\s\\S]+?)" + this.otag + "\\/\\1" + this.ctag + "\\s*", "mg");
+  function escapeHtml(string) {
+    return String(string).replace(/[&<>"'\/]/g, function (s) {
+      return entityMap[s];
+    });
+  }
 
-      // for each {{#foo}}{{/foo}} section do...
-      return template.replace(regex, function(match, name, content) {
-        var value = that.find(name, context);
-        if(that.is_array(value)) { // Enumerable, Let's loop!
-          return that.map(value, function(row) {
-            return that.render(content, that.merge(context,
-                    that.create_context(row)), partials, true);
-          }).join("");
-        } else if (that.is_iterator(value)) {
-          var result = [];
-          var row;
-          while (row = value()) {
-            result.push(that.render(content, that.merge(context,
-                          that.create_context(row)), partials, true));
-          } // fuck buffering, works for now though.
-          return result.join('');
-        } else if(value) { // boolean section
-          return that.render(content, context, partials, true);
-        } else {
-          return "";
-        }
-      });
-    },
+  // Export the escaping function so that the user may override it.
+  // See https://github.com/janl/mustache.js/issues/244
+  exports.escape = escapeHtml;
 
-    /*
-      Replace {{foo}} and friends with values from our view
-    */
-    render_tags: function(template, context, partials, in_recursion) {
-      // tit for tat
-      var that = this;
+  function Scanner(string) {
+    this.string = string;
+    this.tail = string;
+    this.pos = 0;
+  }
 
-      var new_regex = function() {
-        return new RegExp(that.otag + "(=|!|>|\\{|%)?([^\/#]+?)\\1?" +
-          that.ctag + "+", "g");
-      };
+  /**
+   * Returns `true` if the tail is empty (end of string).
+   */
+  Scanner.prototype.eos = function () {
+    return this.tail === "";
+  };
 
-      var regex = new_regex();
-      var lines = template.split("\n");
-       for (var i=0; i < lines.length; i++) {
-         lines[i] = lines[i].replace(regex, function(match, operator, name) {
-           switch(operator) {
-             case "!": // ignore comments
-               return match;
-             case "=": // set new delimiters, rebuild the replace regexp
-               that.set_delimiters(name);
-               regex = new_regex();
-               return "";
-             case ">": // render partial
-               return that.render_partial(name, context, partials);
-             case "{": // the triple mustache is unescaped
-               return that.find(name, context);
-             default: // escape the value
-               return that.escape(that.find(name, context));
-           }
-         }, this);
-         if(!in_recursion) {
-           this.send(lines[i]);
-         }
-       }
-       return lines.join("\n");
-    },
+  /**
+   * Tries to match the given regular expression at the current position.
+   * Returns the matched text if it can match, the empty string otherwise.
+   */
+  Scanner.prototype.scan = function (re) {
+    var match = this.tail.match(re);
 
-    set_delimiters: function(delimiters) {
-      var dels = delimiters.split(" ");
-      this.otag = this.escape_regex(dels[0]);
-      this.ctag = this.escape_regex(dels[1]);
-    },
+    if (match && match.index === 0) {
+      this.tail = this.tail.substring(match[0].length);
+      this.pos += match[0].length;
+      return match[0];
+    }
 
-    escape_regex: function(text) {
-      // thank you Simon Willison
-      if(!arguments.callee.sRE) {
-        var specials = [
-          '/', '.', '*', '+', '?', '|',
-          '(', ')', '[', ']', '{', '}', '\\'
-        ];
-        arguments.callee.sRE = new RegExp(
-          '(\\' + specials.join('|\\') + ')', 'g'
-        );
-      }
-    return text.replace(arguments.callee.sRE, '\\$1');
-    },
+    return "";
+  };
 
-    /*
-      find `name` in current `context`. That is find me a value
-      from the view object
-    */
-    find: function(name, context) {
-      name = this.trim(name);
-      if(typeof context[name] === "function" && !context[name].iterator) {
-        return context[name].apply(context);
-      }
-      if(context[name] !== undefined) {
-        return context[name];
-      }
-      // silently ignore unkown variables
-      return "";
-    },
+  /**
+   * Skips all text until the given regular expression can be matched. Returns
+   * the skipped string, which is the entire tail if no match can be made.
+   */
+  Scanner.prototype.scanUntil = function (re) {
+    var match, pos = this.tail.search(re);
 
-    // Utility methods
+    switch (pos) {
+    case -1:
+      match = this.tail;
+      this.pos += this.tail.length;
+      this.tail = "";
+      break;
+    case 0:
+      match = "";
+      break;
+    default:
+      match = this.tail.substring(0, pos);
+      this.tail = this.tail.substring(pos);
+      this.pos += pos;
+    }
 
-    /*
-      Does away with nasty characters
-    */
-    escape: function(s) {
-      return ((s == null) ? "" : s).toString().replace(/[&"<>\\]/g, function(s) {
-        switch(s) {
-          case "&": return "&amp;";
-          case "\\": return "\\\\";;
-          case '"': return '\"';;
-          case "<": return "&lt;";
-          case ">": return "&gt;";
-          default: return s;
-        }
-      });
-    },
+    return match;
+  };
 
-    /*
-      Merges all properties of object `b` into object `a`.
-      `b.property` overwrites a.property`
-    */
-    merge: function(a, b) {
-      var _new = {};
-      for(var name in a) {
-        if(a.hasOwnProperty(name)) {
-          _new[name] = a[name];
-        }
-      };
-      for(var name in b) {
-        if(b.hasOwnProperty(name)) {
-          _new[name] = b[name];
-        }
-      };
-      return _new;
-    },
+  function Context(view, parent) {
+    this.view = view;
+    this.parent = parent;
+    this._cache = {};
+  }
 
-    // by @langalex, support for arrays of strings
-    create_context: function(_context) {
-      if(this.is_object(_context)) {
-        return _context;
-      } else if(this.pragmas["IMPLICIT-ITERATOR"]) {
-        var iterator = this.pragmas["IMPLICIT-ITERATOR"].iterator || ".";
-        var ctx = {};
-        ctx[iterator] = _context
-        return ctx;
-      }
-    },
+  Context.make = function (view) {
+    return (view instanceof Context) ? view : new Context(view);
+  };
 
-    is_object: function(a) {
-      return a && typeof a == "object";
-    },
+  Context.prototype.push = function (view) {
+    return new Context(view, this);
+  };
 
-    is_array: function(a) {
-      return Object.prototype.toString.call(a) === '[object Array]';
-    },
+  Context.prototype.lookup = function (name) {
+    var value = this._cache[name];
 
-    is_iterator : function(f) {
-      return (typeof f === 'function' && f.iterator);
-    },
-
-    /*
-      Gets rid of leading and trailing whitespace
-    */
-    trim: function(s) {
-      return s.replace(/^\s*|\s*$/g, "");
-    },
-
-    /*
-      Why, why, why? Because IE. Cry, cry cry.
-    */
-    map: function(array, fn) {
-      if (typeof array.map == "function") {
-        return array.map(fn)
+    if (!value) {
+      if (name == '.') {
+        value = this.view;
       } else {
-        var r = [];
-        var l = array.length;
-        for(i=0;i<l;i++) {
-          r.push(fn(array[i]));
+        var context = this;
+
+        while (context) {
+          if (name.indexOf('.') > 0) {
+            value = context.view;
+            var names = name.split('.'), i = 0;
+            while (value && i < names.length) {
+              value = value[names[i++]];
+            }
+          } else {
+            value = context.view[name];
+          }
+
+          if (value != null) break;
+
+          context = context.parent;
         }
-        return r;
       }
+
+      this._cache[name] = value;
+    }
+
+    if (typeof value === 'function') value = value.call(this.view);
+
+    return value;
+  };
+
+  function Writer() {
+    this.clearCache();
+  }
+
+  Writer.prototype.clearCache = function () {
+    this._cache = {};
+    this._partialCache = {};
+  };
+
+  Writer.prototype.compile = function (template, tags) {
+    var fn = this._cache[template];
+
+    if (!fn) {
+      var tokens = exports.parse(template, tags);
+      fn = this._cache[template] = this.compileTokens(tokens, template);
+    }
+
+    return fn;
+  };
+
+  Writer.prototype.compilePartial = function (name, template, tags) {
+    var fn = this.compile(template, tags);
+    this._partialCache[name] = fn;
+    return fn;
+  };
+
+  Writer.prototype.getPartial = function (name) {
+    if (!(name in this._partialCache) && this._loadPartial) {
+      this.compilePartial(name, this._loadPartial(name));
+    }
+
+    return this._partialCache[name];
+  };
+
+  Writer.prototype.compileTokens = function (tokens, template) {
+    var self = this;
+    return function (view, partials) {
+      if (partials) {
+        if (typeof partials === 'function') {
+          self._loadPartial = partials;
+        } else {
+          for (var name in partials) {
+            self.compilePartial(name, partials[name]);
+          }
+        }
+      }
+
+      return renderTokens(tokens, self, Context.make(view), template);
+    };
+  };
+
+  Writer.prototype.render = function (template, view, partials) {
+    return this.compile(template)(view, partials);
+  };
+
+  /**
+   * Low-level function that renders the given `tokens` using the given `writer`
+   * and `context`. The `template` string is only needed for templates that use
+   * higher-order sections to extract the portion of the original template that
+   * was contained in that section.
+   */
+  function renderTokens(tokens, writer, context, template) {
+    var buffer = '';
+
+    var token, tokenValue, value;
+    for (var i = 0, len = tokens.length; i < len; ++i) {
+      token = tokens[i];
+      tokenValue = token[1];
+
+      switch (token[0]) {
+      case '#':
+        value = context.lookup(tokenValue);
+
+        if (typeof value === 'object') {
+          if (isArray(value)) {
+            for (var j = 0, jlen = value.length; j < jlen; ++j) {
+              buffer += renderTokens(token[4], writer, context.push(value[j]), template);
+            }
+          } else if (value) {
+            buffer += renderTokens(token[4], writer, context.push(value), template);
+          }
+        } else if (typeof value === 'function') {
+          var text = template == null ? null : template.slice(token[3], token[5]);
+          value = value.call(context.view, text, function (template) {
+            return writer.render(template, context);
+          });
+          if (value != null) buffer += value;
+        } else if (value) {
+          buffer += renderTokens(token[4], writer, context, template);
+        }
+
+        break;
+      case '^':
+        value = context.lookup(tokenValue);
+
+        // Use JavaScript's definition of falsy. Include empty arrays.
+        // See https://github.com/janl/mustache.js/issues/186
+        if (!value || (isArray(value) && value.length === 0)) {
+          buffer += renderTokens(token[4], writer, context, template);
+        }
+
+        break;
+      case '>':
+        value = writer.getPartial(tokenValue);
+        if (typeof value === 'function') buffer += value(context);
+        break;
+      case '&':
+        value = context.lookup(tokenValue);
+        if (value != null) buffer += value;
+        break;
+      case 'name':
+        value = context.lookup(tokenValue);
+        if (value != null) buffer += exports.escape(value);
+        break;
+      case 'text':
+        buffer += tokenValue;
+        break;
+      }
+    }
+
+    return buffer;
+  }
+
+  /**
+   * Forms the given array of `tokens` into a nested tree structure where
+   * tokens that represent a section have two additional items: 1) an array of
+   * all tokens that appear in that section and 2) the index in the original
+   * template that represents the end of that section.
+   */
+  function nestTokens(tokens) {
+    var tree = [];
+    var collector = tree;
+    var sections = [];
+
+    var token;
+    for (var i = 0, len = tokens.length; i < len; ++i) {
+      token = tokens[i];
+      switch (token[0]) {
+      case '#':
+      case '^':
+        sections.push(token);
+        collector.push(token);
+        collector = token[4] = [];
+        break;
+      case '/':
+        var section = sections.pop();
+        section[5] = token[2];
+        collector = sections.length > 0 ? sections[sections.length - 1][4] : tree;
+        break;
+      default:
+        collector.push(token);
+      }
+    }
+
+    return tree;
+  }
+
+  /**
+   * Combines the values of consecutive text tokens in the given `tokens` array
+   * to a single token.
+   */
+  function squashTokens(tokens) {
+    var squashedTokens = [];
+
+    var token, lastToken;
+    for (var i = 0, len = tokens.length; i < len; ++i) {
+      token = tokens[i];
+      if (token) {
+        if (token[0] === 'text' && lastToken && lastToken[0] === 'text') {
+          lastToken[1] += token[1];
+          lastToken[3] = token[3];
+        } else {
+          lastToken = token;
+          squashedTokens.push(token);
+        }
+      }
+    }
+
+    return squashedTokens;
+  }
+
+  function escapeTags(tags) {
+    return [
+      new RegExp(escapeRe(tags[0]) + "\\s*"),
+      new RegExp("\\s*" + escapeRe(tags[1]))
+    ];
+  }
+
+  /**
+   * Breaks up the given `template` string into a tree of token objects. If
+   * `tags` is given here it must be an array with two string values: the
+   * opening and closing tags used in the template (e.g. ["<%", "%>"]). Of
+   * course, the default is to use mustaches (i.e. Mustache.tags).
+   */
+  exports.parse = function (template, tags) {
+    template = template || '';
+    tags = tags || exports.tags;
+
+    if (typeof tags === 'string') tags = tags.split(spaceRe);
+    if (tags.length !== 2) throw new Error('Invalid tags: ' + tags.join(', '));
+
+    var tagRes = escapeTags(tags);
+    var scanner = new Scanner(template);
+
+    var sections = [];     // Stack to hold section tokens
+    var tokens = [];       // Buffer to hold the tokens
+    var spaces = [];       // Indices of whitespace tokens on the current line
+    var hasTag = false;    // Is there a {{tag}} on the current line?
+    var nonSpace = false;  // Is there a non-space char on the current line?
+
+    // Strips all whitespace tokens array for the current line
+    // if there was a {{#tag}} on it and otherwise only space.
+    function stripSpace() {
+      if (hasTag && !nonSpace) {
+        while (spaces.length) {
+          delete tokens[spaces.pop()];
+        }
+      } else {
+        spaces = [];
+      }
+
+      hasTag = false;
+      nonSpace = false;
+    }
+
+    var start, type, value, chr, token;
+    while (!scanner.eos()) {
+      start = scanner.pos;
+
+      // Match any text between tags.
+      value = scanner.scanUntil(tagRes[0]);
+      if (value) {
+        for (var i = 0, len = value.length; i < len; ++i) {
+          chr = value.charAt(i);
+
+          if (isWhitespace(chr)) {
+            spaces.push(tokens.length);
+          } else {
+            nonSpace = true;
+          }
+
+          tokens.push(['text', chr, start, start + 1]);
+          start += 1;
+
+          // Check for whitespace on the current line.
+          if (chr == '\n') stripSpace();
+        }
+      }
+
+      // Match the opening tag.
+      if (!scanner.scan(tagRes[0])) break;
+      hasTag = true;
+
+      // Get the tag type.
+      type = scanner.scan(tagRe) || 'name';
+      scanner.scan(whiteRe);
+
+      // Get the tag value.
+      if (type === '=') {
+        value = scanner.scanUntil(eqRe);
+        scanner.scan(eqRe);
+        scanner.scanUntil(tagRes[1]);
+      } else if (type === '{') {
+        value = scanner.scanUntil(new RegExp('\\s*' + escapeRe('}' + tags[1])));
+        scanner.scan(curlyRe);
+        scanner.scanUntil(tagRes[1]);
+        type = '&';
+      } else {
+        value = scanner.scanUntil(tagRes[1]);
+      }
+
+      // Match the closing tag.
+      if (!scanner.scan(tagRes[1])) throw new Error('Unclosed tag at ' + scanner.pos);
+
+      token = [type, value, start, scanner.pos];
+      tokens.push(token);
+
+      if (type === '#' || type === '^') {
+        sections.push(token);
+      } else if (type === '/') {
+        // Check section nesting.
+        if (sections.length === 0) throw new Error('Unopened section "' + value + '" at ' + start);
+        var openSection = sections.pop();
+        if (openSection[1] !== value) throw new Error('Unclosed section "' + openSection[1] + '" at ' + start);
+      } else if (type === 'name' || type === '{' || type === '&') {
+        nonSpace = true;
+      } else if (type === '=') {
+        // Set the tags for the next time around.
+        tags = value.split(spaceRe);
+        if (tags.length !== 2) throw new Error('Invalid tags at ' + start + ': ' + tags.join(', '));
+        tagRes = escapeTags(tags);
+      }
+    }
+
+    // Make sure there are no open sections when we're done.
+    var openSection = sections.pop();
+    if (openSection) throw new Error('Unclosed section "' + openSection[1] + '" at ' + scanner.pos);
+
+    tokens = squashTokens(tokens);
+
+    return nestTokens(tokens);
+  };
+
+  // All Mustache.* functions use this writer.
+  var _writer = new Writer();
+
+  /**
+   * Clears all cached templates and partials in the default writer.
+   */
+  exports.clearCache = function () {
+    return _writer.clearCache();
+  };
+
+  /**
+   * Compiles the given `template` to a reusable function using the default
+   * writer.
+   */
+  exports.compile = function (template, tags) {
+    return _writer.compile(template, tags);
+  };
+
+  /**
+   * Compiles the partial with the given `name` and `template` to a reusable
+   * function using the default writer.
+   */
+  exports.compilePartial = function (name, template, tags) {
+    return _writer.compilePartial(name, template, tags);
+  };
+
+  /**
+   * Compiles the given array of tokens (the output of a parse) to a reusable
+   * function using the default writer.
+   */
+  exports.compileTokens = function (tokens, template) {
+    return _writer.compileTokens(tokens, template);
+  };
+
+  /**
+   * Renders the `template` with the given `view` and `partials` using the
+   * default writer.
+   */
+  exports.render = function (template, view, partials) {
+    return _writer.render(template, view, partials);
+  };
+
+  // This is here for backwards compatibility with 0.4.x.
+  exports.to_html = function (template, view, partials, send) {
+    var result = exports.render(template, view, partials);
+
+    if (typeof send === "function") {
+      send(result);
+    } else {
+      return result;
     }
   };
 
-  return({
-    name: "mustache.js",
-    version: "0.2.3-dev",
+  return exports;
 
-    /*
-      Turns a template and view into HTML
-    */
-    to_html: function(template, view, partials, send_fun) {
-      var renderer = new Renderer();
-      if(send_fun) {
-        renderer.send = send_fun;
-      }
-      renderer.render(template, view, partials);
-      if(!send_fun) {
-        return renderer.buffer.join("\n");
-      }
-    },
-    escape : function(string) {
-      var renderer = new Renderer();
-      return renderer.escape(string);
-    }
-  });
-}();
-// for CommonJS
-if (exports) {
-  exports.to_html = Mustache.to_html;
-  exports.escape = Mustache.escape;
-}
+}())));

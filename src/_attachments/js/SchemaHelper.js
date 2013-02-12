@@ -7,16 +7,16 @@
 
         defaults : {
             text: {
-                tpl: '<li><label>{{name}}</label> <input type="text" name="{{name}}" value="{{value}}" {{required}} /></li>'
+                tpl: '<li><label>{{name}}</label> <input type="text" name="{{name}}" value="{{value}}" {{required}} title="{{description}}"/></li>'
             },
             hidden: {
                 tpl: '<li class="hidden"><input type="hidden" name="{{name}}" value="{{value}}" {{required}}/></li>'
             },
             textarea: {
-                tpl: '<li><label>{{name}}</label> <textarea name="{{name}}" {{required}}>{{value}}</textarea></li>'
+                tpl: '<li><label>{{name}}</label> <textarea name="{{name}}" {{required}} title="{{description}}">{{value}}</textarea></li>'
             },
             date: {
-                tpl: '<li><label>{{name}}</label> <input type="text" name="{{name}}" value="{{value}}" {{required}} /></li>', 
+                tpl: '<li><label>{{name}}</label> <input type="text" name="{{name}}" value="{{value}}" {{required}} title="{{description}}"/></li>', 
                 render: function ($self, value) {
 
                         $self.datetimepicker({
@@ -104,6 +104,7 @@
                         name: index,
                         schema: name,
                         required: property.required ? 'required': null,
+                        description: property.description || null,
                         value: instance && instance[index] ?
                             instance[index]: null
                     };
@@ -124,6 +125,10 @@
             self.options.$save.show();
             if (instance) {
                 self.options.$delete.show();
+            }
+
+            if (self.options.hooks[name]) {
+                self.options.hooks[name].postRender(self.options.$form, instance);
             }
         } 
     };

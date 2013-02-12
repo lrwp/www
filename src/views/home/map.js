@@ -18,6 +18,10 @@ function(doc) {
             obj.custom = doc.custom;
             obj.format = doc.format;
         }
+        
+        if (doc.schema === 'slide') {
+            obj.content = doc.content;
+        }
 
         emit(doc.created, obj);
     }
