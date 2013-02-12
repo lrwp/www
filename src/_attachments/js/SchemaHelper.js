@@ -17,16 +17,21 @@
             },
             date: {
                 tpl: '<li><label>{{name}}</label> <input type="text" name="{{name}}" value="{{value}}" {{required}} /></li>', 
-                render: function ($self) {
-                    $self.datepicker({
-                        dateFormat: 'yy-mm-dd'
-                    });
-                    if (!$self.val()) {
-                        $self.datepicker('setDate', new Date());
+                render: function ($self, value) {
+
+                        $self.datetimepicker({
+                            dateFormat: $.datepicker.ISO_8601,
+                            timeFormat: 'h:mmTT'
+                        });
+ 
+                    if (value) {
+                       $self.datetimepicker('setDate', new Date(value));
+                    } else if (!$self.val()){
+                        $self.datetimepicker('setDate', new Date());
                     }
                 },
-                submit: function($self) {
-                    return  new Date($self.val());
+                submit: function ($self) {
+                    return new Date($self.datetimepicker('getDate')).toISOString();
                 }
             }
         },
@@ -107,7 +112,7 @@
                 if (self.options.map.hasOwnProperty(index)) {
                     $ul.append(Mustache.render(self.options.map[index].tpl, view));
                     if (self.options.map[index].render) {
-                        self.options.map[index].render($ul.find('[name='+index+']'));
+                        self.options.map[index].render($ul.find('[name='+index+']'), instance ? instance[index]: undefined);
                     }
                 } else {
                     $ul.append(Mustache.render(self.defaults.text.tpl, view));

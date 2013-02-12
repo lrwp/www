@@ -64,7 +64,12 @@ $(function (){
                 }
             },
             created: SchemaHelper.defaults.date,
-            modified: SchemaHelper.defaults.date
+            modified: {
+                tpl: '<li class="hidden"><label>{{name}}</label> <input type="text" name="{{name}}" value="{{value}}" {{required}} /></li>', 
+                submit: function ($self) {
+                   return (new Date()).toISOString(); 
+                }
+            }
         }
     };
     $new.click(function () {
@@ -138,6 +143,10 @@ $(function (){
             });
         }
         return false;
+    });
+
+    $save.click(function(){
+        $form.parent().submit();
     });
 
     $.getJSON('_session', function(response) {

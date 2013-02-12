@@ -2,14 +2,11 @@
 <html>
 <head lang="en-us">
 	<meta charset="utf-8">
-    <title>{{title}}</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png"/>
-    <link rel="stylesheet" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/css/global.css"/>
-    {{#css}}
-        <link rel="stylesheet" href="{{href}}"/>
-    {{/css}}
-    <link type="text/plain" rel="author" href="/humans.txt"/>
+    <title>{{#title}}{{title}}{{/title}}{{^title}}Little River Wetlands Project{{/title}}</title>
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"/>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/global.css"/>
+    <link rel="stylesheet" href="css/index.css"/>
 </head>
 <body>
 <div class="container">
@@ -17,8 +14,8 @@
     <!-- Banner -->
     <div class="row">
         <div id="header" class="span12">
-            <a id="join" href="/page/join">Join/Donate</a>
-            <img src="/img/logo.png" alt="LRWP Frog Logo"/>
+            <a id="join" href="joindonate.php">Join/Donate</a>
+            <img src="img/logo.png" alt="LRWP Frog Logo"/>
         </div>
     </div>
 
@@ -102,18 +99,23 @@
         </div>
     </div>
 
-    {{body}}
+    {{{body}}}
 
 </div>
 
 <div id="footer">
     &copy; {{year}} Little River Wetlands Project
 </div>
-
 <script src="js/jquery-1.8.2.min.js"></script>
 <script src="js/bootstrap-custom.js"></script>
-{{#js}}
-    <script src="{{src}}"></script>
-{{/js}}
+<script src="js/index.js"></script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "http://connect.facebook.net/en_US/all.js#xfbml=1&appId=329565090434498";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 </body>
 </html>
