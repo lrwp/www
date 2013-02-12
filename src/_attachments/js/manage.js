@@ -52,7 +52,13 @@ $(function (){
                 tpl: null
             },
             content: {
-                tpl: SchemaHelper.defaults.textarea.tpl
+                tpl: '<li class="wysiwyg"><label>{{name}}</label> <textarea name="{{name}}" {{required}}>{{value}}</textarea></li>',
+                render: function ($self) {
+                    CKEDITOR.replace($self[0]);
+                },
+                submit: function ($self) {
+                    return CKEDITOR.instances[$self.attr('name')].getData();
+                }
             },
             schema: {
                 tpl: '<li class="hidden"><input type="hidden" name="{{name}}" value="{{schema}}" {{required}}/></li>'
@@ -65,13 +71,14 @@ $(function (){
             },
             created: SchemaHelper.defaults.date,
             modified: {
-                tpl: '<li class="hidden"><label>{{name}}</label> <input type="text" name="{{name}}" value="{{value}}" {{required}} /></li>', 
+                tpl: SchemaHelper.defaults.hidden.tpl, 
                 submit: function ($self) {
                    return (new Date()).toISOString(); 
                 }
             }
         }
     };
+
     $new.click(function () {
         var name = $(this).attr('data-schema');
         SchemaHelper.toForm(schemaList[name], name);
@@ -95,6 +102,7 @@ $(function (){
                     $save.popover('show');
 
                     setTimeout(function() {
+                        $delete.fadeIn();
                         $save.popover('hide');
                     }, 2500);
                 }
