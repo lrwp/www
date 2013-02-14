@@ -26,6 +26,11 @@
             "required": true,
             "description": "Main content for news article, only shown on the news and updates page."
         },
+       "rank": {
+            "type": "integer",
+            "required": true,
+            "description": "The lower the number the higher the position of the news in the list."
+        }, 
         "created": {
             "type": "string",
             "required": true,
@@ -37,6 +42,11 @@
         "author": {
             "type": "string",
             "required": true
+        },
+        "key": {
+            "type": "string",
+            "required": true,
+            "default": "rank"
         }
     }
 }

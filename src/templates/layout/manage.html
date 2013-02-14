@@ -46,18 +46,63 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li role="menuitem">
+                            <a id="show-docs">
+                                <i class="icon-question-sign"></i> 
+                                Help 
+                            </a>
+                        </li>
+                        <li role="menuitem">
                             <a id="logout">
                                 <i class="icon-off"></i> 
                                 Logout
                             </a>
                         </li>
-                    </ul>
+                   </ul>
                 </li>
             </ul>
         </div>
     </div>
 </div>
 <div class="container">
+
+    <div id="docs" class="span12">
+        <h1>LRWP Content Manager</h1>
+        <hr />
+        <h2>Documentation</h2>
+        <ul>
+            <li>
+                <i class="icon-plus-sign"></i> <a href="#doc-create">Creatng New Content</a>
+            </li>
+            <li>
+                <i class="icon-edit"></i> <a href="#doc-edit">Editing Content</a>
+            </li>
+            <li>
+                <i class="icon-remove-circle"></i> <a href="#doc-delete">Deleting Content</a>
+            </li>
+        </ul>
+
+        <h2 id="doc-create">Creating New Content</h2>
+        <p>To create new content hover over one of the content types on the navigation bar at the top of this page and click on the "Create" link.</p>
+        <img src="/img/manage-create.jpg" class="img-polaroid" alt="Create Content"/>
+
+        <p>A form will appear in the main window. Add your desired content into the form fields and click the "Save" button.</p>
+        <img src="/img/manage-save.jpg" class="img-polaroid" alt="Save Content"/>
+
+        <p>Some content types require certain form fields to be filled out completely or to be formated in a particular way. If information is missing or incorrectly formatted you will be prompted by an error message. Content will not be saved until the errors have been resolved.</p>
+        <img src="/img/manage-error.jpg" class="img-polaroid" alt="Save Error"/>
+
+        <h2 id="doc-edit">Editing Content</h2>
+        <p>To edit existing content, hover over a content drop down and click on the title of the item you sould like to edit.</p>
+        <img src="/img/manage-edit.jpg" class="img-polaroid" alt="Edit Content"/>
+
+        <p>Make the desired changes and click the "Save" button. Changes will not be saved until "Save" is clicked and you recieve the message stating that the document has been saved.</p>
+
+        <h2 id="doc-delete">Deleting Content</h2>
+        <p>To delete a content, hover over a content drop down and click on the title of the item you wish to delete. Click the "Delete" button next to the save button and confirm that you want to delete the item.</p>
+        <img src="/img/manage-confirm.jpg" class="img-polaroid" alt="Delete Content"/>
+        <p>Deleted items cannot be recovered after you confirm the deletion.</p>
+
+    </div>
 
     <!-- Form -->
     <div class="row">
@@ -99,15 +144,15 @@
 </form>
 
 <!-- Attachment  Modal -->
-<form id="attach" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" method="post" action="">
+<form id="attach" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" method="post" action="#">
     <div class="modal-header">
         <h3><i class="icon-file"></i> Upload Attachment</h3>
     </div>
     <div class="modal-body">
         <div class="control-group">
-            <label class="control-label" for="attachment">File</label>
+            <label class="control-label">File</label>
             <div class="controls">
-                <input type="file"i/>
+                <input type="file"/>
             </div>
         </div>
     </div>

@@ -2,6 +2,17 @@ body {
     padding-top:40px;
 }
 
+#docs img {
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:20px;
+}
+
+#docs h2 {
+    margin-top:10px;
+}
+
 #nav .navbar-inner {
     padding-left:20px;
     padding-right:20px;
@@ -27,12 +38,12 @@ a {
     cursor: pointer;
 }
 
-#login {
-    width:360px;
-}
-
 #login i{
     vertical-align: middle;
+}
+
+#docs {
+    display:none;
 }
 
 #controls {

@@ -58,6 +58,11 @@
         "author": {
             "type": "string",
             "required": true
+        },
+        "key": {
+            "type": "string",
+            "required": true,
+            "default": "start"
         }
     }
 }

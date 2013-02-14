@@ -6,6 +6,8 @@ function(doc, req) {
         var
             Mustache = require('lib/Mustache'),
             Moment = require('lib/Moment'),
+            maxEvents = 5,
+            totalEvents = 0,
             ea, body, active = false,
             date = new Date(),
             view = {};
@@ -22,15 +24,24 @@ function(doc, req) {
                 ea.value.end = Moment(ea.value.end).format('h:mma');
             }
             
-            // we need to mark on slide as active
+            // we need to mark one slide as active
             if (ea.value.schema === 'slide' && !active) {
                 ea.value.active = 'active';
                 active = true;
             }
 
+            // We want the ID in the object for Mustache
             ea.value.id = ea.id;
-            view[ea.value.schema].push(ea.value);
-        }
+
+            // Only show some events - perhaps we should get events via ajax instead?
+            if (ea.value.schema === 'event' && totalEvents < maxEvents) {
+                view[ea.value.schema].push(ea.value);
+                totalEvents += 1;
+            } else {
+                view[ea.value.schema].push(ea.value);
+            }
+
+       }
 
         //return JSON.stringify(view, null, 4);
         // Render the view

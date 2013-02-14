@@ -9,6 +9,12 @@
             text: {
                 tpl: '<li><label>{{name}}</label> <input type="text" name="{{name}}" value="{{value}}" {{required}} title="{{description}}"/></li>'
             },
+            number: {
+                tpl: '<li><label>{{name}}</label> <input type="number" name="{{name}}" value="{{value}}" {{required}} title="{{description}}"/></li>',
+                submit: function($self) {
+                    return parseInt($self.val(), 10);
+                }
+            },
             hidden: {
                 tpl: '<li class="hidden"><input type="hidden" name="{{name}}" value="{{value}}" {{required}}/></li>'
             },
@@ -62,7 +68,6 @@
                 }
 
             });
-
             $.ajax({
                 url: '/api/' + obj._id,
                 data: JSON.stringify(obj),
@@ -106,7 +111,7 @@
                         required: property.required ? 'required': null,
                         description: property.description || null,
                         value: instance && instance[index] ?
-                            instance[index]: null
+                            instance[index]: property['default'] ? property['default'] : null
                     };
 
                 // Do we have special options for this proerty?
@@ -121,10 +126,10 @@
             });
 
             $ul.appendTo(self.options.$form);
-            self.options.$form.parents().show();
-            self.options.$save.show();
+            self.options.$form.parents().fadeIn();
+            self.options.$save.fadeIn();
             if (instance) {
-                self.options.$delete.show();
+                self.options.$delete.fadeIn();
             }
 
             if (self.options.hooks[name]) {

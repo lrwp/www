@@ -1,5 +1,6 @@
-$(function (){
+$(function () {
     'use strict';
+
     var
         schemaList = null,
         $new = $('.schema-new'),
@@ -12,6 +13,8 @@ $(function (){
         $save = $('#save'),
         $delete = $('#delete'),
         $attach = $('#attach'),
+        $docs = $('#docs'),
+        $docsShow = $('#show-docs'),
         userCtx,
         ids = [],
         getIds = function(callback) {
@@ -40,7 +43,7 @@ $(function (){
             slide: {
                 postRender: function($form, instance) {
                     // render a view of the photo
-                    console.log($form, instance);
+                    //console.log($form, instance);
                 }
             }
         },
@@ -60,11 +63,15 @@ $(function (){
             _revisions: {
                 tpl: null
             },
+            rank: SchemaHelper.defaults.number,
+            key: {
+                tpl: '<li class="hidden"><input type="hidden" name="key" value="{{#value}}{{value}}{{/value}}" {{required}}/></li>'
+            },
             _attachments: {
                 tpl: '<li><label>Image</label> <input name="{{name}}" type="hidden"/> {{#_attachments}}{{/_attachments}} <button class="btn uploader" type="button">Upload</button></li>',
                 render: function ($self, value) {
                     if (value) {
-                        console.log(value);
+                        //console.log(value);
                         $self.val(JSON.stringify(value));
                     } else {
                         $self.val('{}');
@@ -108,6 +115,7 @@ $(function (){
     };
 
     $new.click(function () {
+        $docs.hide();
         var name = $(this).attr('data-schema');
         SchemaHelper.toForm(schemaList[name], name);
     });
@@ -117,13 +125,14 @@ $(function (){
             $this = $(this),
             callback = function (response) {
                 if (response.error) {
-                    alert('Error ' + response.error +': '+ response.reason);
+                    alert(response.error +': '+ response.reason);
                 } else {
                     updateDocs(response.schema);
                     $save.popover({
                         placement: 'top',
-                        title: 'Ok',
-                        content: 'Document Saved.',
+                        html: true,
+                        title: '<i class="icon-ok"></i> Saved',
+                        content: 'This document has been saved.',
                         trigger: 'manual'
                     });
                  
@@ -158,6 +167,7 @@ $(function (){
     });
 
     $edit.on('click', '.schema-edit', function () {
+        $docs.hide();
         var $this = $(this);
         $.getJSON('/api/' + this.id, function(response){
             SchemaHelper.toForm(schemaList[response.schema], response.schema, response); 
@@ -186,17 +196,24 @@ $(function (){
     });
 
     $form.on('click', '.uploader', function() {
-        console.log(this);
         $attach.modal();
     });
 
-    $.getJSON('_session', function(response) {
+    $docsShow.click(function () {
+        $form.parent().hide();
+        $save.hide();
+        $delete.hide();
+        $docs.fadeIn();
+    });
+
+    $.getJSON('_session?'+(new Date()), function(response) {
         userCtx = response.userCtx;
         if (userCtx.roles.indexOf('_admin') !== -1 || userCtx.roles.indexOf('lrwp') !== -1) {
             $user.text(userCtx.name);
             $.getJSON('/_show/schema', function(response) {
                 schemaList = response.schema;
                 $nav.fadeIn();
+                $docs.fadeIn();
             });
        } else {
             $login.modal({
