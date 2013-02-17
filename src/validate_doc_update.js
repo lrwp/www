@@ -25,11 +25,12 @@ function(newDoc, oldDoc, userCtx) {
         throw({forbidden : 'There is no schema for: ' + newDoc.schema});
     }
 
-    // This check simply enforces that the author is who they claim to be
+    // Confirm that the author is who they claim to be
     if (userCtx.name !== newDoc.author) {
         throw({forbidden: 'Author must be the current user.'});
     }
 
+    // Do Schema validation
     var
         JSV = require("lib/jsv").JSV,
         env = JSV.createEnvironment('json-schema-draft-03'),
