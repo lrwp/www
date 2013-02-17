@@ -12,9 +12,6 @@
         "_revisions":{
             "type": "object"
         },
-        "_attachments": {
-            "type": "object"
-        },
         "schema": {
             "type": "string",
             "required": true
@@ -23,12 +20,17 @@
             "type": "string",
             "required": true
         },
-        "link": {
-            "type": "string"
+       "link": {
+            "type": "string",
+            "description": "Optional link that the user is sent to when clicking on this image. It can be a relative link (/page/committees) or absolute (http://http://www.acreslandtrust.org/)."
         },
         "content": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Content that is shown below the title, should be fairly short with minimal formatting."
+        },
+        "_attachments": {
+            "type": "object"
         },
         "created": {
             "type": "string",
@@ -40,6 +42,16 @@
         "author": {
             "type": "string",
             "required": true
+        },
+        "key": {
+            "type":"string",
+            "required": true,
+            "default": "rank"
+        },
+        "rank":{
+            "type": "integer",
+            "required": true,
+            "description": "A number used to sort the slide images, the lower the number the sooner it will appear in the list of images"
         }
     }
 }

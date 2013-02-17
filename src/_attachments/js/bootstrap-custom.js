@@ -2026,3 +2026,78 @@
 
 
 }(window.jQuery);
+
+// Search Widget
+$(function () {
+
+    'use strict';
+
+    var
+        $wx = $('#search-widget input'),
+        $wxc,
+        result;
+
+    $wx.popover({
+        title: '<i class="icon-search"></i> Search Results <button type="button" class="close" id="search-close" aria-hidden="true">×</button>',
+        placement: "bottom",
+        content: "Type to begin searching...",
+        html: true,
+        trigger: 'manual'
+    });
+
+    $('#search-widget').on('click', '#search-close', function () {
+        $wx.popover('hide');
+    });
+
+    $wx.focus(function () {
+        $wx.popover('show');
+        if (!result) {
+            $wxc = $('#search-widget .popover-content');
+            $.getJSON('/_view/page-key-desc', function (response) {
+                result = response;
+                // fire keyup incase the user already started typing
+                $wx.keyup();
+            });
+        } else {
+            $wxc.html('');
+        }
+    });
+
+    $wx.keyup(function (e) {
+        var val = $wx.val(), match = [];
+
+        if (val.length > 3) {
+
+            $wxc.html('');
+
+            $.each(result.rows, function (index) {
+                $.each(result.rows[index].value.keywords, function(key) {
+                    if (val.toLowerCase() === result.rows[index].value.keywords[key].toLowerCase()) {
+                        match.push({
+                            title: result.rows[index].value.title,
+                            link: result.rows[index].key,
+                            desc: result.rows[index].value.description
+                        });
+                    }
+                });
+            });
+        }
+
+        if (!match.length && val.length > 8) {
+            $wxc.html('No results found, try <a href="https://www.google.com/search?q=site:lrwp.org%20'+encodeURIComponent(val)+'">Google</a>?')
+        }
+
+        if (match.length) {
+            var $ul = $(document.createElement('ul'));
+
+            $.each(match, function (index) {
+                var $li = $(document.createElement('li'));
+                $li.append('<a href="/page/' + match[index].link + '">' + match[index].title + '</a> - ' + match[index].desc).appendTo($ul);
+            });
+
+            $ul.appendTo($wxc);
+        }
+
+    });
+
+});

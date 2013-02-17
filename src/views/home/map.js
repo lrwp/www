@@ -30,6 +30,16 @@ function(doc) {
         
         if (doc.schema === 'slide') {
             obj.content = doc.content;
+            obj._attachments = doc._attachments;
+            obj.link = doc.link;
+        }
+
+        if (doc.schema === 'species') {
+            obj.common = doc.common;
+            obj.content = doc.content;
+            obj.type = doc.type;
+            obj._attachments = doc._attachments;
+            obj.latin = doc.latin;
         }
 
         emit(key, obj);

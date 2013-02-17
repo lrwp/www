@@ -20,8 +20,3 @@ jQuery-ui
 Bootstrap
 Mustache
 JSV
-
-// Quality Assurance:
-JSLINT
-W3C Validator
-YSlow

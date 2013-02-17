@@ -1,6 +1,5 @@
 function(newDoc, oldDoc, userCtx) {
 
-
     // Require Authentication
     if (!userCtx.name) {
         throw({forbidden : 'You must be logged in'});

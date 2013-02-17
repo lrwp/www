@@ -1,0 +1,58 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "_id": {
+            "type": "string",
+            "required": true
+        },
+        "_rev": {
+            "type": "string"
+        },
+        "_revisions":{
+            "type": "object"
+        },
+        "schema": {
+            "type": "string",
+            "required": true
+        },
+        "common": {
+            "type": "string",
+            "required": true,
+            "description": "Common name of species"
+        },
+        "alternate": {
+            "type": "string",
+            "description": "Any alternate common name(s)"
+        },
+        "latin": {
+            "type": "string",
+            "required": true,
+            "description": "Latin name of species"
+        },
+        "type": {
+            "type": "string",
+            "enum": ["Fauna", "Flora"]
+        },
+        "content": {
+            "type": "string",
+            "required": true,
+            "description": "Description of the species"
+       },
+        "_attachments": {
+            "type": "object"
+        },
+        "created": {
+            "type": "string",
+            "required": true,
+            "description": "News briefs are sorted ascending by create date. This date is also shown on the news and updates page."
+        },
+        "modified": {
+            "type": "string"
+        },
+        "author": {
+            "type": "string",
+            "required": true
+       }
+    }
+}

@@ -16,7 +16,7 @@ $(function () {
         $docs = $('#docs'),
         $docsShow = $('#show-docs'),
         userCtx,
-        ids = [],
+        ids = [], parts,
         getIds = function(callback) {
             $.getJSON('/_uuids?count=25', function(response){ 
                 ids = response.uuids;
@@ -26,27 +26,59 @@ $(function () {
         docListTpl = '<li role="menuitem"><a data-schema="{{schema}}" class="schema-edit" title="Created {{created}} by {{author}}" id="{{id}}">{{title}}</a></li>',
         updateDocs = function (schema) {
            $.getJSON('_view/all-by-schema?key="'+schema+'"', function (response) {
-                var i, $doclist = $('.doclist[data-schema='+schema+']');
+                var $doclist = $('.doclist[data-schema='+schema+']');
                 $doclist.nextAll('li').remove();
-                for (i in response.rows) {
+                $.each(response.rows, function(i) {
                     response.rows[i].value.id = response.rows[i].id;
                     $doclist.parent().append(Mustache.render(docListTpl, response.rows[i].value));
-                }
+                });
            }); 
+        },
+        getCurrentId = function () {
+            return $form.find('[name=_id]').val();
+        },
+        getCurrentRev = function () {
+            return $form.find('[name=_rev]').val();
         };
+
+    $form.on('hover', '.label-upload', function () {
+        var
+            id = getCurrentId(),
+            $this = $(this),
+            name = $this.attr('data-title');
+
+        $this.attr('data-content', '<img src="'+'/api/'+ id + '/' + name +'"/>');
+
+        if (!$this.attr('data-init')) {
+            
+            $this.popover({
+                html: true,
+                trigger: 'hover',
+                placement: 'bottom'
+            }).popover('show');
+            
+            $this.attr('data-init', 1);
+        }
+    });
+
+    var UploadHelper = {
+        options: {},
+        init: function() {
+            var self = UploadHelper;
+            if (self.options.value) {
+                $.each(self.options.value, function (index) {
+                    self.options.input.parent().append('<span class="label label-info label-upload" data-title="'+index+'"> '+index+' <button type="btn" class="close">&times;</button></span>');
+                });
+                self.options.input.val(JSON.stringify(self.options.value));
+            }                
+            self.options.input.parent().append('<button type="button" class="uploader btn">Upload</button>');
+        }
+    };
 
     SchemaHelper.options = {
         $form: $form,
         $delete: $delete,
         $save: $save,
-        hooks: {
-            slide: {
-                postRender: function($form, instance) {
-                    // render a view of the photo
-                    //console.log($form, instance);
-                }
-            }
-        },
         map : {
             _id: {
                 tpl: SchemaHelper.defaults.hidden.tpl,
@@ -67,25 +99,29 @@ $(function () {
             key: {
                 tpl: '<li class="hidden"><input type="hidden" name="key" value="{{#value}}{{value}}{{/value}}" {{required}}/></li>'
             },
+            category: SchemaHelper.defaults.select,
+            type: SchemaHelper.defaults.select,
+            link: {
+                tpl: '<li><label>{{name}}</label> <input name="{{name}}" type="text" placeholder="some-page-name" value="{{value}}" {{required}} data-content="{{description}}"/></li>'
+            },
             _attachments: {
-                tpl: '<li><label>Image</label> <input name="{{name}}" type="hidden"/> {{#_attachments}}{{/_attachments}} <button class="btn uploader" type="button">Upload</button></li>',
+                tpl: '<li class="attachment-li"><label>Image</label> <input name="{{name}}" type="hidden"/></li>',
                 render: function ($self, value) {
-                    if (value) {
-                        //console.log(value);
-                        $self.val(JSON.stringify(value));
-                    } else {
-                        $self.val('{}');
-                    }
+                    UploadHelper.options = {
+                        input: $self,
+                        value: value 
+                    };
+                    UploadHelper.init();
                 },
                 submit: function($self) {
-                    return JSON.parse($self.val());
+                    return $self.val() ? JSON.parse($self.val()) : null;
                 }
             },
             title: {
-                tpl: '<li><label>{{name}}</label> <input class="input-xxlarge" type="text" name="{{name}}" value="{{value}}" {{required}} title="{{description}}"/></li>',
+                tpl: '<li><label>{{name}}</label> <input class="input-xxlarge" type="text" name="{{name}}" value="{{value}}" {{required}} data-content="{{description}}"/></li>'
             },
             content: {
-                tpl: '<li class="wysiwyg"><label title="{{description}}">{{name}}</label> <textarea name="{{name}}" {{required}}>{{value}}</textarea></li>',
+                tpl: '<li class="wysiwyg"><label data-content="{{description}}">{{name}}</label> <textarea name="{{name}}" {{required}}>{{value}}</textarea></li>',
                 render: function ($self) {
                     CKEDITOR.replace($self[0]);
                 },
@@ -196,7 +232,15 @@ $(function () {
     });
 
     $form.on('click', '.uploader', function() {
-        $attach.modal();
+        var id = getCurrentId(), rev = getCurrentRev();
+
+        if (getCurrentId()) {
+            $attach.attr('action', 'api/' + id);
+            $attach.find('[name=_rev]').val(rev);
+            $attach.modal();
+        } else {
+            alert('You must save the document before you may upload.');
+        }
     });
 
     $docsShow.click(function () {
@@ -213,7 +257,13 @@ $(function () {
             $.getJSON('/_show/schema', function(response) {
                 schemaList = response.schema;
                 $nav.fadeIn();
-                $docs.fadeIn();
+
+                // Handle situation when someon clicks 'edit page'
+                if (window.location.hash) {
+                    $(window.location.hash).click();
+                } else {
+                    $docs.fadeIn();
+                }
             });
        } else {
             $login.modal({

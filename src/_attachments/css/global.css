@@ -55,8 +55,14 @@ ul.nav li.dropdown:hover ul.dropdown-menu{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#01794c', endColorstr='#00603c',GradientType=0 ); /* IE6-9 */
 }
 
-#search input{
-    width: 80px;
+#search-widget input{
+    width: 110px;
+    margin-bottom:0;
+}
+
+#search-widget > i {
+    margin-left: -20px;
+    opacity: 1.5;
 }
 
 #header {
@@ -66,9 +72,33 @@ ul.nav li.dropdown:hover ul.dropdown-menu{
 
 #header img {
     background: #fff;
-    opacity:0.85;
+    background: rgba(255,255,255,0.80);
     margin-top:39px;
     margin-left:22px;
+}
+
+#edit-page {
+    height: 20px;
+    padding-top:20px;
+    margin-top: -12px;
+    background: #333;
+    color: white;
+    width:120px;
+    text-align:center;
+    padding-bottom:5px;
+    color:#fff;
+    float:right;
+    margin-right: 10px;
+    cursor:pointer;
+    -webkit-box-shadow: 4px 4px 3px rgba(50, 50, 50, 0.65);
+    -moz-box-shadow:    4px 4px 3px rgba(50, 50, 50, 0.65);
+    box-shadow:         4px 4px 3px rgba(50, 50, 50, 0.65);
+    text-decoration:none;
+    -webkit-transition: margin-top .3s ease-out;
+}
+
+#edit-page:hover {
+    color:orange;
 }
 
 #join {
@@ -118,3 +148,4 @@ ul.nav li.dropdown:hover ul.dropdown-menu{
     padding-top: 10px;
     padding-bottom: 10px;
 }
+

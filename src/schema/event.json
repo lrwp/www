@@ -19,38 +19,37 @@
         "title": {
             "type": "string",
             "required": true,
-            "description": "Headline for event, shown above the start and end times."
+            "description": "This is the headline for the event, it will always be shown above the content."
         },
        "category": {
             "type": "string",
+            "description": "Every event must have a category. On the events page, events are grouped by category.",
+            "enum": ["Little River Ramblers", "Breakfast on the Marsh", "Special Events", "Volunteer Opportunities", "Saturday Hiking"],
             "required": true
+        },
+         "custom": {
+            "type": "string",
+            "description": "A custom string to use for the display date. This is useful when you have unusual start and end times such as 'Every Tuesday from 9 to 11'"
         },
         "start": {
             "type": "string",
             "required": true,
-            "description": "Date and time the event starts."
+            "description": "The date and time that the event will begin. Events are sorted ascending by start date and time."
         },
         "end": {
             "type": "string",
             "required": true,
-            "description": "Date and time the event ends. After this date, the event will be removed from the website."
+            "description": "The date and time that the event will end. After this date, the event will be removed from the website."
         },
-         "custom": {
-            "type": "string",
-            "description": "A custom string to use for the display date instead of '<start date> from <start time>to <end time>'"
-        },
-        "content": {
+       "content": {
             "type": "string",
             "required": true,
-            "description": "Description of event, shown below the title and date."
-        },
-       "location": {
-            "type": "string",
-            "description": "Location of the event."
+            "description": "This is the description of the event, it will be shown below the title and date."
         },
        "created": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Date and time the event was created."
         },
         "modified": {
             "type": "string"

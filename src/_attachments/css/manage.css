@@ -1,5 +1,5 @@
 body {
-    padding-top:40px;
+    padding-top:80px;
 }
 
 #docs img {
@@ -22,8 +22,29 @@ body {
     text-transform: capitalize;
 }
 
+#schema-form label {
+    font-weight: bold;
+}
+
 #schema-form ul {
     list-style: none;
+}
+
+#schema-form {
+    padding-bottom: 60px;
+}
+
+#schema-form legend i {
+    vertical-align: middle;
+}
+
+#schema-form legend {
+    font-size:28px;
+    margin-bottom:0;
+}
+
+#schema-form ul {
+    padding-top:20px;
 }
 
 textarea {
@@ -60,6 +81,28 @@ a {
 
 .wysiwyg {
     margin-bottom:10px;
+}
+
+#attach h3 i {
+    vertical-align: middle;
+}
+
+.uploader-fade {
+    opacity: 0.35;
+}
+
+.label-upload {
+    min-width: 128px;
+    margin-right: 10px;
+}
+.attachment-li {
+    margin-bottom:10px;
+}
+
+#login .modal-body img {
+    float:left;
+    margin-right: 50px;
+    margin-left: 20px;
 }
 
 /* css for timepicker */

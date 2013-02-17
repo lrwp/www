@@ -3,7 +3,7 @@
 <head lang="en-us">
 	<meta charset="utf-8">
     <title>Manage</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <link rel="stylesheet" href="/css/jquery-ui-1.10.0.custom.css"/>
     <link rel="stylesheet" href="/css/global.css"/>
@@ -18,13 +18,13 @@
             <a class="brand" href="/">LRWP</a>
             <ul class="nav">
                 {{#schema}}
-                    <li class="dropdown">
+                    <li class="dropdown schema-is-{{name}}">
                         <a role="button" class="dropdown-toggle dropdown-link schema-name" data-toggle="dropdown">{{name}}</a>
                         <ul class="dropdown-menu schema-actions" role="menu">
                             <li role="menuitem">
                                 <a data-schema="{{name}}" class="schema-new">
                                     <i class="icon-plus-sign"></i> 
-                                    Create <span class="schema-name">{{name}}</span>
+                                    Create <span class="schema-name">&nbsp;{{name}}</span>
                                 </a>
                             </li>
                             <li role="menuitem" class="divider doclist" data-schema="{{name}}"></li>
@@ -88,7 +88,7 @@
         <p>A form will appear in the main window. Add your desired content into the form fields and click the "Save" button.</p>
         <img src="/img/manage-save.jpg" class="img-polaroid" alt="Save Content"/>
 
-        <p>Some content types require certain form fields to be filled out completely or to be formated in a particular way. If information is missing or incorrectly formatted you will be prompted by an error message. Content will not be saved until the errors have been resolved.</p>
+        <p>Some content types require certain form fields to be filled out completely or to be formatted in a particular way. If information is missing or incorrectly formatted you will be prompted by an error message. Content will not be saved until the errors have been resolved.</p>
         <img src="/img/manage-error.jpg" class="img-polaroid" alt="Save Error"/>
 
         <h2 id="doc-edit">Editing Content</h2>
@@ -98,7 +98,7 @@
         <p>Make the desired changes and click the "Save" button. Changes will not be saved until "Save" is clicked and you recieve the message stating that the document has been saved.</p>
 
         <h2 id="doc-delete">Deleting Content</h2>
-        <p>To delete a content, hover over a content drop down and click on the title of the item you wish to delete. Click the "Delete" button next to the save button and confirm that you want to delete the item.</p>
+        <p>To remove content, hover over a content drop down and click on the title of the item you wish to delete. Click the "Delete" button next to the save button and confirm that you want to delete the item.</p>
         <img src="/img/manage-confirm.jpg" class="img-polaroid" alt="Delete Content"/>
         <p>Deleted items cannot be recovered after you confirm the deletion.</p>
 
@@ -125,16 +125,17 @@
         <h3><i class="icon-lock"></i> Authentication Required</h3>
     </div>
     <div class="modal-body">
+        <img src="/img/logo.png"/>
         <div class="control-group">
             <label class="control-label" for="username">Username</label>
             <div class="controls">
-                <input type="text" class="input-xlarge" name="name" id="username" placeholder="Username">
+                <input type="text" class="input-large" name="name" id="username" placeholder="Username">
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="password">Password</label>
             <div class="controls">
-                <input class="input-xlarge" type="password" name="password" id="password" placeholder="Password">
+                <input class="input-large" type="password" name="password" id="password" placeholder="Password">
             </div>
         </div>
     </div>
@@ -144,25 +145,33 @@
 </form>
 
 <!-- Attachment  Modal -->
-<form id="attach" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" method="post" action="#">
+<form id="attach" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" method="POST" action="#" enctype="multipart/form-data">
     <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3><i class="icon-file"></i> Upload Attachment</h3>
     </div>
     <div class="modal-body">
+    <div class="alert alert-block">
+        <button class="close" data-dismiss="alert" type="button">&times;</button>
+        <h4>Note</h4>
+            Uploading an attachment requires a page refresh, you will lose any unsaved data. Please save all changes before uploading attachments.
+        </div>
         <div class="control-group">
             <label class="control-label">File</label>
             <div class="controls">
-                <input type="file"/>
+                <input type="file" name="_attachements"/>
+                <input type="hidden" name="_rev" value=""/>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary">Upload</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Upload</button>
     </div>
 </form>
-
-
-<script src="/js/jquery-1.8.2.min.js"></script>
+<!--[if lt IE 8]><script src="/js/json2.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="/js/ie.js"></script><![endif]-->
+<script src="//code.jquery.com/jquery-1.8.2.min.js"></script>
 <script src="/js/bootstrap-custom.js"></script>
 <script src="/js/jquery-ui-1.10.0.custom.min.js"></script>
 <script src="/js/jquery-ui-timepicker-addon.js"></script>

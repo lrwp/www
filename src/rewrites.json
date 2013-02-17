@@ -7,6 +7,18 @@
     "to": "../../*"
 },
 {
+    "from": "page/:link",
+    "to": "_list/page/page-by-link",
+    "query" : {
+        "include_docs": "true",
+        "key": ":link"
+    }
+},
+{
+    "from": "page",
+    "to": "_list/home/home"
+},
+{
     "from": "manage",
     "to": "_list/manage/all-by-schema"
 },

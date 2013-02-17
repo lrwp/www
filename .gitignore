@@ -1,3 +1,4 @@
 src/.couchapprc
 *.swp
 *.swo
+build

@@ -19,7 +19,7 @@
         "title": {
             "type": "string",
             "required": true,
-            "description": "Headline of the news article, displayed on the homepage and above the content.",
+            "description": "Thi is the headline for the news article, it will be displayed on the homepage.",
         },
         "content": {
             "type": "string",
@@ -29,12 +29,12 @@
        "rank": {
             "type": "integer",
             "required": true,
-            "description": "The lower the number the higher the position of the news in the list."
+            "description": "News articles are sorted ascending by rank. The lower the rank, the higher the in the list it will be."
         }, 
         "created": {
             "type": "string",
             "required": true,
-            "description": "News articles are sorted ascending by create date."
+            "description": "Date and time the article was created."
         },
         "modified": {
             "type": "string"

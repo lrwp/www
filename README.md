@@ -5,8 +5,8 @@ The Website
 
 # To Do
 1. jslintify everything
-2. Create list function for generic pages
-3. Format _attachments to work with mustache 
-4. Image Upload
-5. Allow revision navigation
-6. Create FloraFauna Schema
+2. Image Upload
+3. Allow revision navigation
+4. Get Events and Wildlife via Ajax on homepage
+5. Fix Microformats for events
+6. Create a Proper 404 page.

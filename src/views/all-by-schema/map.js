@@ -4,7 +4,7 @@ function(doc) {
     if (doc.schema) {
         emit(doc.schema, {
             schema: doc.schema,
-            title: doc.title,
+            title: doc.title || doc.common,
             created: new Date(doc.created),
             author: doc.author
         });

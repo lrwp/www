@@ -19,22 +19,22 @@
         "title": {
             "type": "string",
             "required": true,
-            "description": "Headline of news brief, will be shown on the homepage and above content."
+            "description": "This is the headline for the news brief, it will be shown on the homepage."
         },
         "content": {
             "type": "string",
             "required": true,
-            "description": "Main content of the news brief, will be shown on the news and updates page."
+            "description": "This is content of the news brief, it will be shown on the news and updates page below the title."
        },
        "rank": {
             "type": "integer",
             "required": true,
-            "description": "The lower the number the higher the position of the brief in the list."
+            "description": "The news briefs are sorted ascending by rank. The lower the rank, the higher in the list it will be."
        },
         "created": {
             "type": "string",
             "required": true,
-            "description": "News briefs are sorted ascending by create date. This date is also shown on the news and updates page."
+            "description": "The date the news brief was created."
         },
         "modified": {
             "type": "string"

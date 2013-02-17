@@ -18,21 +18,40 @@
         },
         "title": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "The page title is shown in the browser window and at the top of the page."
+        },
+        "link": {
+            "type": "string",
+            "required": true,
+            "description": "The link is the URL friendly version of the title. It should be lowercase and only contain numbers, letters, and hyphens. For example if the link is 'committees', the page would be available at lrwp.org/page/committees."
+        },
+       "content": {
+            "type": "string",
+            "required": true,
+            "description": "This is the content that is displayed on the page"
+        },
+        "description": {
+            "type": "string",
+            "required": true,
+            "description": "A short description of the content. The description will be embedded in the page and is commonly used by search engines and browsers."
+        },
+        "keywords": {
+            "type": "string",
+            "description": "Used by the search toolbar in the navigation bar and is also embedded into the page. This field should be a short list of comma-separated keywords to describe the content."
         },
         "layout": {
-            "type": "string"
-        },
-        "content": {
             "type": "string",
-            "required": true
+            "default": "default",
+            "description": "The layout to use for this page. The default value will be fine for most pages."
         },
         "created": {
-            "type": "integer",
-            "required": true
+            "type": "string",
+            "required": true,
+            "description":"Date and time the page was created"
         },
         "modified": {
-            "type": "integer"
+            "type": "string"
         },
         "author": {
             "type": "string",
