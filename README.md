@@ -11,3 +11,4 @@ The Website
 5. Fix Microformats for events
 6. Create a Proper 404 page.
 7. Use JSV client side too.
+8. Cronjob to remove expired events.

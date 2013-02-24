@@ -250,7 +250,7 @@ $(function () {
         $docs.fadeIn();
     });
 
-    $.getJSON('_session?'+(new Date()), function(response) {
+    $.getJSON('_session', function(response) {
         userCtx = response.userCtx;
         if (userCtx.roles.indexOf('_admin') !== -1 || userCtx.roles.indexOf('lrwp') !== -1) {
             $user.text(userCtx.name);

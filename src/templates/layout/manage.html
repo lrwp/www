@@ -23,7 +23,7 @@
                         <ul class="dropdown-menu schema-actions" role="menu">
                             <li role="menuitem">
                                 <a data-schema="{{name}}" class="schema-new">
-                                    <i class="icon-plus-sign"></i> 
+                                    <i class="icon-plus-sign"></i>&nbsp; 
                                     Create <span class="schema-name">&nbsp;{{name}}</span>
                                 </a>
                             </li>
@@ -42,18 +42,18 @@
             <ul class="nav pull-right">
                 <li class="dropdown pull-right">
                     <a role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">
-                        <i class="icon-user"></i> <span id="user">Username</span>
+                        <i class="icon-user"></i>&nbsp;<span id="user">Username</span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li role="menuitem">
                             <a id="show-docs">
-                                <i class="icon-question-sign"></i> 
+                                <i class="icon-question-sign"></i>&nbsp; 
                                 Help 
                             </a>
                         </li>
                         <li role="menuitem">
                             <a id="logout">
-                                <i class="icon-off"></i> 
+                                <i class="icon-off"></i>&nbsp;
                                 Logout
                             </a>
                         </li>
@@ -122,10 +122,10 @@
 <!-- Login Modal -->
 <form id="login" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" method="post" action="_session/?next=/manage">
     <div class="modal-header">
-        <h3><i class="icon-lock"></i> Authentication Required</h3>
+        <h3><i class="icon-lock"></i>&nbsp;Authentication Required</h3>
     </div>
     <div class="modal-body">
-        <img src="/img/logo.png"/>
+        <img src="/img/logo.png" alt="logo"/>
         <div class="control-group">
             <label class="control-label" for="username">Username</label>
             <div class="controls">
@@ -159,8 +159,8 @@
         <div class="control-group">
             <label class="control-label">File</label>
             <div class="controls">
-                <input type="file" name="_attachements"/>
-                <input type="hidden" name="_rev" value=""/>
+                <input type="file" name="_attachments"/>
+                <input type="hidden" name="_rev"/>
             </div>
         </div>
     </div>
@@ -177,6 +177,7 @@
 <script src="/js/jquery-ui-timepicker-addon.js"></script>
 <script src="/js/mustache.js"></script>
 <script src="/js/ckeditor/ckeditor.js"></script>
+<script src="//static.vary.io/js/ckeditor/ckeditor.js"></script>
 <script src="/js/SchemaHelper.js"></script>
 <script src="/js/manage.js"></script>
 </body>
