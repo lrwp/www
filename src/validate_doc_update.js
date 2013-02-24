@@ -27,7 +27,7 @@ function(newDoc, oldDoc, userCtx) {
 
     // Confirm that the author is who they claim to be
     if (userCtx.name !== newDoc.author) {
-        throw({forbidden: 'Author must be the current user.'});
+        throw({forbidden: 'Author('+newDoc.author+') does not match user ('+userCtx.name+') ' + JSON.stringify(newDoc)});
     }
 
     // Do Schema validation

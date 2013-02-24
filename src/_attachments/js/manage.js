@@ -231,7 +231,7 @@ $(function () {
         $form.parent().submit();
     });
 
-    $form.on('click', '.uploader', function() {
+    $form.on('click', '.uploader', function () {
         var id = getCurrentId(), rev = getCurrentRev();
 
         if (getCurrentId()) {
@@ -241,6 +241,31 @@ $(function () {
         } else {
             alert('You must save the document before you may upload.');
         }
+    });
+
+    $form.on('click', '.close', function () {
+        // get _attachments
+        var _att = JSON.parse($form.find('[name=_attachments]').val());
+        delete _att[$(this).parent().attr('data-title')];
+        $form.find('[name=_attachments]').val(JSON.stringify(_att));
+        $(this).parent().popover('hide').remove();
+    });
+
+
+    $attach.submit(function () {
+        var $this = $(this), $frame = $(document.createElement('iframe')).attr({ id : 'uploadFrame', name: 'uploadFrame'}).css({ 'display' : 'none' });
+        $frame.appendTo(document.body);
+        $this.attr({ target : 'uploadFrame'});
+        $frame.load(function () {
+            var result = JSON.parse($frame.contents().text());
+            $frame.remove();
+            if (result.error) {
+                alert(result.error + ': ' + result.reason);
+            } else {
+                $attach.modal('hide');
+                $('#' + getCurrentId()).click();
+            }
+        });
     });
 
     $docsShow.click(function () {
