@@ -13,10 +13,4 @@ Erica
 Tmux
 Vim
 Git
-
-// Using:
-jQuery
-jQuery-ui
-Bootstrap
-Mustache
-JSV
+<3
