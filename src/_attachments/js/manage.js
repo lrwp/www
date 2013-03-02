@@ -45,9 +45,14 @@ $(function () {
         var
             id = getCurrentId(),
             $this = $(this),
-            name = $this.attr('data-title');
+            name = $this.attr('data-title'),
+            lname = name.toLowerCase();
 
-        $this.attr('data-content', '<img src="'+'/api/'+ id + '/' + name +'"/>');
+        if (lname.indexOf('.jpg') !== -1 || lname.indexOf('.jpeg') !== -1 || lname.indexOf('.png') !== -1 || lname.indexOf('.gif') !== -1) {
+            $this.attr('data-content', '<img src="'+'/api/'+ id + '/' + name +'"/>');
+        } else {
+            $this.attr('data-content', 'No preview available');
+        }
 
         if (!$this.attr('data-init')) {
             

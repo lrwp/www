@@ -4,11 +4,14 @@ www
 The Website
 
 # To Do
-1. jslintify everything
-2. Image Upload - Show message about saving, show success message.
-3. Allow revision navigation
-4. Get Events and Wildlife via Ajax on homepage
-5. Fix Microformats for events
-6. Create a Proper 404 page.
-7. Use JSV client side too.
-8. Cronjob to remove expired events.
+* jslintify everything
+* Image Upload - Show message about saving, show success message.
+* Allow revision navigation.
+* Get Events and Wildlife via Ajax on homepage.
+* Fix Microformats for events.
+* Create a Proper 404 page.
+* Use JSV client side too.
+* Cronjob to remove expired events.
+* Show ajax status on save button.
+* Make Join/Donate button affixed to top of page.
+* Add Google Analytics
