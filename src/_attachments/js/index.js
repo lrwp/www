@@ -6,6 +6,7 @@ $(function () {
         $slideshow = $('#slideshow'),
         $control= $slideshow.find('.carousel-control'),
         $species = $('.species'),
+        $events = $('#events'),
         cache = { species: {} };
     
     $slideshow.carousel();
@@ -46,5 +47,9 @@ $(function () {
                 $target.modal('show');
             }
         });
+    });
+
+    $.get('/_list/event/public-event?xhr&limit=6&nocat&include_docs=true', function (res) {
+       $events.html(res); 
     });
 });

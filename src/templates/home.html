@@ -19,23 +19,10 @@
             </div>
 
             <!-- Events -->
-            <div id="events">
+            <div>
                 <h3>Upcoming Events</h3>
-                {{#event}}
-                    <div class="vevent">
-                        <h4><a href="#" class="summary url">{{title}}</a></h4>
-                        {{#custom}}
-                            <b>{{custom}}</b>
-                        {{/custom}}
-                        <b {{#custom}}class="hidden"{{/custom}}>
-                            <span class="dtstart">{{start}}</span> to
-                            <span class="dtend">{{end}}</span>
-                        </b>
-
-                        <div>{{{content}}}</div>
-                    </div>
-                {{/event}}
-                <a href="#" class="btn btn-info pull-right"><i class="icon-calendar"></i>&nbsp;More Events</a>
+                <div id="events"></div>
+                <a href="/events" class="btn btn-info pull-right"><i class="icon-calendar"></i>&nbsp;More Events</a>
             </div>
 
         </div>

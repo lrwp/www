@@ -5,7 +5,6 @@ function(doc, req) {
     provides('html', function () {
         var
             Mustache = require('lib/Mustache'),
-            Moment = require('lib/Moment'),
             maxEvents = 6,
             totalEvents = 0,
             ea, body, active = false, push,
@@ -25,12 +24,6 @@ function(doc, req) {
             // We want the ID in the object for Mustache
             ea.value.id = ea.id;
 
-            // we nicely format dates for events
-            if (ea.value.schema === 'event') {
-                ea.value.start = Moment(ea.value.start).format('dddd, MMMM Do, [from] h:mma');
-                ea.value.end = Moment(ea.value.end).format('h:mma');
-            }
-            
             if (ea.value.schema === 'slide') {
 
                 // we need to mark one slide as active

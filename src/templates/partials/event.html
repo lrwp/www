@@ -1,0 +1,30 @@
+<div class="vevent">
+
+   <h4 id="{{_id}}">
+        <a href="/events/#{{_id}}" class="summary url">
+            {{title}}
+            {{#custom}}
+                <span class="hidden">: {{custom}}</span>
+            {{/custom}}
+        </a>
+    </h4>
+
+    {{#custom}}
+        <b>{{custom}}</b>
+    {{/custom}}
+
+    <b {{#custom}}class="hidden"{{/custom}}>
+
+        <span class="dtstart">
+            {{start}}, from {{stime}} <span class="value-title" title="{{dtstart}}"></span>
+        </span>
+        &nbsp;to&nbsp;
+        <span class="dtend">
+            {{etime}} <span class="value-title" title="{{dtend}}"></span>
+        </span>
+
+    </b>
+    <span class="hidden category">{{category}}</span>
+    <div class="description">{{{content}}}</div>
+
+</div>

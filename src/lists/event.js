@@ -11,7 +11,9 @@ function(doc, req) {
             ea, 
             view = {},
             events = [],
-            page;
+            page, cat,
+            xhr = req.query.hasOwnProperty('xhr'),
+            nocat = req.query.hasOwnProperty('nocat');
 
         Moment.fn.formatInZone = function(format, offset) {
             return this.clone().utc().add('hours', offset).format(format);
@@ -28,19 +30,24 @@ function(doc, req) {
 
             // Create a Mustache-Friendly structure
             if (!view.hasOwnProperty(ea.doc.category)) {
-                view[ea.doc.category] = { category: ea.doc.category, docs : []};
+
+                view[ea.doc.category] = {
+                    category: nocat ? null : ea.doc.category,
+                    span : xhr ? 'span8' : 'span12',
+                    docs : []
+                };
       
                 // add a property the same name as the category for mustache conditionals
                 view[ea.doc.category][ea.doc.category] = true;
             }
             
             // Data and time formatting
-            ea.doc.dtstart = Moment(ea.doc.start).formatInZone('YYYY-MM-DD HH:mm:ss', -4);
+            ea.doc.dtstart = Moment(ea.doc.start).formatInZone('YYYY-MM-DDTHH:mm:ss', -4) + '-04:00';
             ea.doc.stime = Moment(ea.doc.start).formatInZone('h:mma', -4);
-            ea.doc.dtend = Moment(ea.doc.end).formatInZone('YYYY-MM-DD HH:mm:ss', -4);
+            ea.doc.dtend = Moment(ea.doc.end).formatInZone('YYYY-MM-DDTHH:mm:ss', -4) + '-04:00';
             ea.doc.etime = Moment(ea.doc.end).formatInZone('h:mma', -4);
             ea.doc.start = Moment(ea.doc.start).formatInZone('dddd, MMMM Do', -4);
-
+            
             // Push the doc
             view[ea.doc.category].docs.push(ea.doc);
         }
@@ -51,10 +58,21 @@ function(doc, req) {
         } 
 
         // Render the view
-        //return JSON.stringify(events, null, 4);
-        body = Mustache.to_html(this.templates.event, {events: events, page: page});
+//       return JSON.stringify(view, null, 4);
+        body = Mustache.to_html(this.templates.event, {
+                events: events,
+                page: page || null
+            },
+            {
+                event: this.templates.partials.event
+            });
+
+        if (xhr) {
+            return body;
+        }
+
         return Mustache.to_html(this.templates.layout.default, {
-                title: page.title,
+                title: page ? page.title : null,
                 body: body,
                 year: date.getFullYear(),
                 microformat: true

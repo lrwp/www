@@ -1,14 +1,15 @@
 <div class="row">
-    <div class="span12">
-        {{#page}}
-            {{{content}}}
-        {{/page}}
-    </div>
-    {{#events}}
-        <div class="span12">
+    {{#page}}
+            <div class="span12">
+                {{{content}}}
+            </div>
+    {{/page}}
 
-            <h2>{{category}}</h2>
- 
+    {{#events}}
+        <div class="{{span}}">
+
+            {{#category}}<h2>{{category}}</h2>{{/category}}
+
             {{! Add messages for each category here}}
             {{#Breakfast on the Marsh}}
                 <div class="alert alert-info">
@@ -21,36 +22,7 @@
             {{/Breakfast on the Marsh}}
 
             {{#docs}}
-                <div class="vevent">
-
-                   <h4 id="{{_id}}">
-                        <a href="http://lrwp.vary.io/events/#{{_id}}" class="summary url">
-                            {{title}}
-                            {{#custom}}
-                                <span class="hidden">: {{custom}}</span>
-                            {{/custom}}
-                        </a>
-                    </h4>
-
-                    {{#custom}}
-                        <b>{{custom}}</b>
-                    {{/custom}}
-
-                    <b {{#custom}}class="hidden"{{/custom}}>
-
-                        <span class="dtstart">
-                            {{start}}, from {{stime}} <span class="value-title" title="{{dtstart}}"></span>
-                        </span>
-
-                        <span class="dtend">
-                            {{etime}} <span class="value-title" title="{{dtend}}"></span>
-                        </span>
-
-                    </b>
-                    <span class="hidden category">{{category}}</span>
-                    <div class="description">{{{content}}}</div>
-
-                </div>
+                {{> event}}
             {{/docs}}
         </div>
     {{/events}}

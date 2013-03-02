@@ -16,3 +16,4 @@ The Website
 * Add Google Analytics.
 * Ajaxable pages.
 * Allow news, events and wildlife to have icons.
+* Create rewrites for all old php pages
