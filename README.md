@@ -6,8 +6,8 @@ The Website
 # To Do
 * jslintify everything
 * Allow revision navigation.
-* Get Events and Wildlife via Ajax on homepage.
-* Fix Microformats for events.
+* Get Wildlife via Ajax on homepage.
+* Fix Time offsets for events.
 * Create a Proper 404 page.
 * Use JSV client side too.
 * Cronjob to remove expired events.

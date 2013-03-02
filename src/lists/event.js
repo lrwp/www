@@ -16,6 +16,8 @@ function(doc, req) {
             nocat = req.query.hasOwnProperty('nocat');
 
         Moment.fn.formatInZone = function(format, offset) {
+            // adjust for dst
+            offset += 1;
             return this.clone().utc().add('hours', offset).format(format);
         }
 
@@ -42,11 +44,11 @@ function(doc, req) {
             }
             
             // Data and time formatting
-            ea.doc.dtstart = Moment(ea.doc.start).formatInZone('YYYY-MM-DDTHH:mm:ss', -4) + '-04:00';
-            ea.doc.stime = Moment(ea.doc.start).formatInZone('h:mma', -4);
-            ea.doc.dtend = Moment(ea.doc.end).formatInZone('YYYY-MM-DDTHH:mm:ss', -4) + '-04:00';
-            ea.doc.etime = Moment(ea.doc.end).formatInZone('h:mma', -4);
-            ea.doc.start = Moment(ea.doc.start).formatInZone('dddd, MMMM Do', -4);
+            ea.doc.dtstart = Moment(ea.doc.start).formatInZone('YYYY-MM-DDTHH:mm:ss', -5) + '-05:00';
+            ea.doc.stime = Moment(ea.doc.start).formatInZone('h:mma', -5);
+            ea.doc.dtend = Moment(ea.doc.end).formatInZone('YYYY-MM-DDTHH:mm:ss', -5) + '-05:00';
+            ea.doc.etime = Moment(ea.doc.end).formatInZone('h:mma', -5);
+            ea.doc.start = Moment(ea.doc.start).formatInZone('dddd, MMMM Do', -5);
             
             // Push the doc
             view[ea.doc.category].docs.push(ea.doc);
