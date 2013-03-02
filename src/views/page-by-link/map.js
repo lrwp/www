@@ -1,4 +1,3 @@
- // This is a special view for the homepage
 function(doc) {
  
    'use strict';

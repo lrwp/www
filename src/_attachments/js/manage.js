@@ -49,16 +49,18 @@ $(function () {
             lname = name.toLowerCase();
 
         if (lname.indexOf('.jpg') !== -1 || lname.indexOf('.jpeg') !== -1 || lname.indexOf('.png') !== -1 || lname.indexOf('.gif') !== -1) {
-            $this.attr('data-content', '<img src="'+'/api/'+ id + '/' + name +'"/>');
+            $this.attr('data-content', '<img src="'+'/api/'+ id + '/' + name +'"/><br /><a target="_blank" href="/api/'+id+'/'+name+'">Click to view</a>');
         } else {
-            $this.attr('data-content', 'No preview available');
+            $this.attr({
+                'data-content': '<a target="_blank" href="/api/'+id+'/'+name+'">Click to view</a>',
+                'title': 'Click for preview'});
         }
 
         if (!$this.attr('data-init')) {
             
             $this.popover({
                 html: true,
-                trigger: 'hover',
+                trigger: 'click',
                 placement: 'bottom'
             }).popover('show');
             
@@ -110,7 +112,7 @@ $(function () {
                 tpl: '<li><label>{{name}}</label> <input name="{{name}}" type="text" placeholder="some-page-name" value="{{value}}" {{required}} data-content="{{description}}"/></li>'
             },
             _attachments: {
-                tpl: '<li class="attachment-li"><label>Image</label> <input name="{{name}}" type="hidden"/></li>',
+                tpl: '<li class="attachment-li"><label>Attachment</label> <input name="{{name}}" type="hidden"/></li>',
                 render: function ($self, value) {
                     UploadHelper.options = {
                         input: $self,

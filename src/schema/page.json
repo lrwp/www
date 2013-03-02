@@ -45,6 +45,10 @@
             "default": "default",
             "description": "The layout to use for this page. The default value will be fine for most pages."
         },
+        "script": {
+            "type": "string",
+            "description": "An additional JavaScript file to include in the page."
+        },
         "created": {
             "type": "string",
             "required": true,

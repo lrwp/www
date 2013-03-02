@@ -21,6 +21,7 @@ function(head, req) {
                 description: page.doc.description,
                 keywords: page.doc.keywords,
                 schema: 'page',
+                script: page.doc.script,
                 id: page.id,
                 user: req.userCtx,
                 year: date.getFullYear()
