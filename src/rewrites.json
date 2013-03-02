@@ -19,6 +19,13 @@
     "to": "_list/home/home"
 },
 {
+    "from": "events",
+    "to": "_list/event/event-page",
+    "query": {
+        "include_docs": "true"
+    }
+},
+{
     "from": "manage",
     "to": "_list/manage/all-by-schema"
 },

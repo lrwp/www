@@ -6,13 +6,15 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <link rel="stylesheet" href="/css/global.css"/>
-    {{#schema}}
-        <link rel="stylesheet" href="/css/{{schema}}.css"/>
-    {{/schema}}
     {{^schema}}
         <link rel="stylesheet" href="/css/index.css"/>
     {{/schema}}
-    <link type="text/plain" rel="author" href="/humans.txt"/>
+    {{#microformat}}
+        <link rel="profile" href="http://microformats.org/profile/hcalendar"/>
+    {{/microformat}}
+    {{#rss}}
+        <link rel="alternate" href="{{rss}}" type="application/rss+xml" title="RSS"/>
+    {{/rss}}
     <meta name="author" content="Last modified on {{modified}} by {{author}}"/>
     <meta name="description" content="{{description}}"/>
     <meta name="keywords" content="{{keywords}}"/>
@@ -111,7 +113,7 @@
         </div>
     </div>
 
-    <div class="wrap">
+    <div class="{{#schema}}wrap{{/schema}}">
         {{{body}}}
     </div>
 

@@ -68,15 +68,14 @@
 
                         $self.datetimepicker({
                             dateFormat: $.datepicker.ISO_8601,
-                            timeFormat: 'h:mmTT',
-                            showButtonPanel: false,
-                            stepMinute: 15
+                            timeFormat: "h:mmTT",
+                            showButtonPanel: false
                         });
  
                     if (value) {
-                       $self.datetimepicker('setDate', Date.fromISO(value));
+                       $self.datetimepicker('setDate', (Date.fromISO(value)));
                     } else if (!$self.val()){
-                        $self.datetimepicker('setDate', new Date());
+                        $self.datetimepicker('setDate', (new Date()));
                     }
                 },
                 submit: function ($self) {

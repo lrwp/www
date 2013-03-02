@@ -6,6 +6,12 @@ body {
     display:none;
 }
 
+.wrap {
+    padding-left:10px;
+    padding-right:10px;
+    padding-bottom:20px;
+}
+
 /* bootstrap ovverides */
 .navbar-inverse .navbar-inner {
     border-color: #005935;
