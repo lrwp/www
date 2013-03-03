@@ -20,7 +20,7 @@
 },
 {
     "from": "events",
-    "to": "_list/event/event-page",
+    "to": "_list/event-page/event-page",
     "query": {
         "include_docs": "true"
     }

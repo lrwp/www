@@ -1,0 +1,80 @@
+function(doc, req) {
+
+    'use strict';
+  
+    provides('html', function () {
+        var
+            Mustache = require('lib/Mustache'),
+            Moment = require('lib/Moment'),
+            body,
+            date = new Date(),
+            ea, 
+            view = {},
+            events = [],
+            page,
+            catOrder = ['Special Events', 'Saturday Hiking', 'Little River Ramblers', 'Breakfast on the Marsh', 'Volunteer Opportunities'];
+
+        Moment.fn.formatInZone = function(format, offset) {
+            // adjust for dst
+            offset += 1;
+            return this.clone().utc().add('hours', offset).format(format);
+        }
+
+        // Lop through all documents in view
+        while (ea = getRow()) {
+
+            // Grab the event page
+            if (ea.doc.schema === 'page') {
+                page = ea.doc;
+                break;
+            }
+
+            // Create a Mustache-Friendly structure
+            if (!view.hasOwnProperty(ea.doc.category)) {
+
+                view[ea.doc.category] = {
+                    category: ea.doc.category,
+                    span : 'span12',
+                    docs : []
+                };
+      
+                // add a property the same name as the category for mustache conditionals
+                view[ea.doc.category][ea.doc.category] = true;
+            }
+            
+            // Data and time formatting
+            ea.doc.dtstart = Moment(ea.doc.start).formatInZone('YYYY-MM-DDTHH:mm:ss', -5) + '-05:00';
+            ea.doc.stime = Moment(ea.doc.start).formatInZone('h:mma', -5);
+            ea.doc.dtend = Moment(ea.doc.end).formatInZone('YYYY-MM-DDTHH:mm:ss', -5) + '-05:00';
+            ea.doc.etime = Moment(ea.doc.end).formatInZone('h:mma', -5);
+            ea.doc.start = Moment(ea.doc.start).formatInZone('dddd, MMMM Do', -5);
+            
+            // Push the doc
+            view[ea.doc.category].docs.push(ea.doc);
+        }
+
+        // We want to see the categories in a particualr order
+        for (ea in catOrder) {
+            if (view.hasOwnProperty(catOrder[ea])) {
+                events.push(view[catOrder[ea]]);
+            }
+        }
+
+        // Render the view
+//       return JSON.stringify(view, null, 4);
+        body = Mustache.to_html(this.templates['event-page'], {
+                events: events,
+                page: page
+            },
+            {
+                event: this.templates.partials.event
+            });
+
+        return Mustache.to_html(this.templates.layout.default, {
+                title: page ? page.title : null,
+                body: body,
+                year: date.getFullYear(),
+                microformat: true
+            });
+    });
+}

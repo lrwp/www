@@ -1,0 +1,29 @@
+<div class="row">
+    {{#page}}
+            <div class="span12">
+                {{{content}}}
+            </div>
+    {{/page}}
+
+    {{#events}}
+        <div class="span12">
+
+            <h2>{{category}}</h2>
+
+            {{! Add messages for each category here}}
+            {{#Breakfast on the Marsh}}
+                <div class="alert alert-info">
+                    Second Thursday of each month - Well-seasoned nature lovers (50+),
+                    join us for a light breakfast and nature presentation at the Coventry
+                    Meadows Senior Community on W. Jefferson Blvd. at 8:00am. Please
+                    register with Betsy Yankowiak at 260-478-2515 or b.yankowiak@lrwp.org
+                    so we can be sure to have enough food.
+                </div>
+            {{/Breakfast on the Marsh}}
+
+            {{#docs}}
+                {{> event}}
+            {{/docs}}
+        </div>
+    {{/events}}
+</div>
