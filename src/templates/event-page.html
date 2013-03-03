@@ -1,9 +1,13 @@
+{{#volunteer}}
+    {{> volunteer}}
+{{/volunteer}}
+
 <div class="row">
-    {{#page}}
+    {{#top}}
             <div class="span12">
-                {{{content}}}
+                {{#page}}{{{content}}}{{/page}}
             </div>
-    {{/page}}
+    {{/top}}
 
     {{#events}}
         <div class="span12">
@@ -26,4 +30,10 @@
             {{/docs}}
         </div>
     {{/events}}
+
+    {{#bottom}}
+        <div class="span12">
+                 {{#page}}{{{content}}}{{/page}} 
+        </div>
+    {{/bottom}}
 </div>
