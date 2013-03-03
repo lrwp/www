@@ -25,6 +25,11 @@ function(head, req) {
                 id: page.id,
                 user: req.userCtx,
                 year: date.getFullYear()
+            },
+            {
+                banner: this.templates.partials.banner,
+                navigation: this.templates.partials.navigation,
+                footer: this.templates.partials.footer
             });
     });
 }

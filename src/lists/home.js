@@ -7,7 +7,7 @@ function(doc, req) {
             Mustache = require('lib/Mustache'),
             maxEvents = 6,
             totalEvents = 0,
-            ea, body, active = false, push,
+            ea, active = false, push,
             filename, hasFlora = false, hasFauna = false,
             date = new Date(),
             view = {};
@@ -73,10 +73,14 @@ function(doc, req) {
        }
 
         // Render the view
-        body = Mustache.to_html(this.templates.home, view);
-        return Mustache.to_html(this.templates.layout.default, {
-                body: body,
+        return Mustache.to_html(this.templates.layout.home, {
+                body: Mustache.to_html(this.templates.home, view),
                 year: date.getFullYear()
+            },
+            {
+                banner: this.templates.partials.banner,
+                navigation: this.templates.partials.navigation,
+                footer: this.templates.partials.footer
             });
     });
 }

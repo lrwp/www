@@ -49,6 +49,10 @@
             "type": "string",
             "description": "An additional JavaScript file to include in the page."
         },
+        "style": {
+            "type": "string",
+            "description": "An additional Css file to include in the page."
+        },
         "created": {
             "type": "string",
             "required": true,

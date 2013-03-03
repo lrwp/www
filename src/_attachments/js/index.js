@@ -49,7 +49,7 @@ $(function () {
         });
     });
 
-    $.get('/_list/event/public-event?limit=6t&include_docs=true', function (res) {
+    $.get('/_list/event/public-event?limit=6&include_docs=true', function (res) {
        $events.html(res); 
     });
 });
