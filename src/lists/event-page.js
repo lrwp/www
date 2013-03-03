@@ -71,10 +71,17 @@ function(doc, req) {
             });
 
         return Mustache.to_html(this.templates.layout.default, {
-                title: page ? page.title : null,
+                title: page.title,
                 body: body,
                 year: date.getFullYear(),
+                script: page.script,
+                style: page.style,
                 microformat: true
+            },
+            {
+                banner: this.templates.partials.banner,
+                navigation: this.templates.partials.navigation,
+                footer: this.templates.partials.footer
             });
     });
 }

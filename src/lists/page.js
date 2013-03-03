@@ -6,13 +6,18 @@ function(head, req) {
         var
             Mustache = require('lib/Mustache'),
             page = getRow(),
-            date = new Date();
+            date = new Date(),
+            xhr = req.query.hasOwnProperty('xhr');
 
         if (!page) {
             return this.templates.layout.e404;
         }
 
         // Render the view
+        if (xhr) {
+            return page.doc.content
+        }
+
         return Mustache.to_html(this.templates.layout[page.doc.layout], {
                 title: page.doc.title,
                 body: page.doc.content,
@@ -22,6 +27,7 @@ function(head, req) {
                 keywords: page.doc.keywords,
                 schema: 'page',
                 script: page.doc.script,
+                style: page.doc.style,
                 id: page.id,
                 user: req.userCtx,
                 year: date.getFullYear()
