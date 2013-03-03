@@ -50,6 +50,9 @@
             text: {
                 tpl: '<li><label>{{name}}</label> <input type="text" name="{{name}}" value="{{value}}" {{required}} data-content="{{description}}"/></li>'
             },
+            readonly: {
+                tpl: '<li><label>{{name}}</label> <input type="text" name="{{name}}" value="{{value}}" {{required}} data-content="{{description}}" readonly/></li>'
+            },
             number: {
                 tpl: '<li><label>{{name}}</label> <input type="number" name="{{name}}" value="{{value}}" {{required}} data-content="{{description}}"/></li>',
                 submit: function($self) {

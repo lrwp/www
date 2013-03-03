@@ -140,7 +140,7 @@ $(function () {
                 tpl: '<li class="hidden"><input type="hidden" name="{{name}}" value="{{schema}}" {{required}}/></li>'
             },
             author: {
-                tpl: SchemaHelper.defaults.hidden.tpl,
+                tpl: SchemaHelper.defaults.readonly.tpl,
                 render: function ($self) {
                     $self.val(userCtx.name);
                 }
@@ -149,7 +149,7 @@ $(function () {
             start: SchemaHelper.defaults.date,
             end: SchemaHelper.defaults.date,
             modified: {
-                tpl: SchemaHelper.defaults.hidden.tpl, 
+                tpl: SchemaHelper.defaults.readonly.tpl, 
                 submit: function ($self) {
                    return (new Date()).toISOString(); 
                 }

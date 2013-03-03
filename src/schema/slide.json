@@ -32,6 +32,16 @@
         "_attachments": {
             "type": "object"
         },
+       "key": {
+            "type":"string",
+            "required": true,
+            "default": "rank"
+        },
+        "rank":{
+            "type": "integer",
+            "required": true,
+            "description": "A number used to sort the slide images, the lower the number the sooner it will appear in the list of images"
+        },
         "created": {
             "type": "string",
             "required": true
@@ -42,16 +52,6 @@
         "author": {
             "type": "string",
             "required": true
-        },
-        "key": {
-            "type":"string",
-            "required": true,
-            "default": "rank"
-        },
-        "rank":{
-            "type": "integer",
-            "required": true,
-            "description": "A number used to sort the slide images, the lower the number the sooner it will appear in the list of images"
         }
     }
 }

@@ -16,3 +16,6 @@ The Website
 * Ajaxable pages.
 * Allow news, events and wildlife to have icons.
 * Create rewrites for all old php pages
+* Add location to events
+* Save user agent in management area
+* Warn user if their time is off
