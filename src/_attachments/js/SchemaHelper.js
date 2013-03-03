@@ -182,6 +182,7 @@
 
             $ul.appendTo(self.options.$form);
             self.options.$form.parents().fadeIn();
+            self.options.$form.parents('form').removeClass('hidden');
             self.options.$save.fadeIn();
             if (instance) {
                 self.options.$delete.fadeIn();
