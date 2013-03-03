@@ -26,6 +26,23 @@
     }
 },
 {
+    "from": "volunteer",
+    "to": "_list/event-page/event-volunteer",
+    "query": {
+        "include_docs": "true",
+        "bottom": "",
+        "volunteer": ""
+    }
+},
+{
+    "from": "special",
+    "to": "_list/event-page/event-special",
+    "query": {
+        "include_docs": "true",
+        "bottom": ""
+    }
+},
+{
     "from": "manage",
     "to": "_list/manage/all-by-schema"
 },

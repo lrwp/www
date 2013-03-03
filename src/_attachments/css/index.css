@@ -13,9 +13,6 @@
     width: 100%;
 }
 
-.carousel .item {-webkit-transition: opacity 1s; -moz-transition: opacity 1s; -ms-transition: opacity 1s; -o-transition: opacity 1s; transition: opacity 1s;}
-.carousel .active.left {left:0;opacity:0;z-index:2;}
-
 .carousel-control{
     display:none;
     top: 50%;

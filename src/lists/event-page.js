@@ -12,6 +12,8 @@ function(doc, req) {
             view = {},
             events = [],
             page,
+            bottom = req.query.hasOwnProperty('bottom'),
+            volunteer = req.query.hasOwnProperty('volunteer'),
             catOrder = ['Special Events', 'Saturday Hiking', 'Little River Ramblers', 'Breakfast on the Marsh', 'Volunteer Opportunities'];
 
         Moment.fn.formatInZone = function(format, offset) {
@@ -64,10 +66,14 @@ function(doc, req) {
 //       return JSON.stringify(view, null, 4);
         body = Mustache.to_html(this.templates['event-page'], {
                 events: events,
-                page: page
+                page: page,
+                bottom: bottom,
+                top: !bottom,
+                volunteer: volunteer
             },
             {
-                event: this.templates.partials.event
+                event: this.templates.partials.event,
+                volunteer: volunteer ? this.templates.partials.volunteer : null
             });
 
         return Mustache.to_html(this.templates.layout.default, {

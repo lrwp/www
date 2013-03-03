@@ -42,6 +42,9 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003d24', endColorstr='#004c2b',GradientType=0 ); /* IE6-9 */
 }
 
+.carousel .item {-webkit-transition: opacity 1s; -moz-transition: opacity 1s; -ms-transition: opacity 1s; -o-transition: opacity 1s; transition: opacity 1s;}
+.carousel .active.left {left:0;opacity:0;z-index:2;}
+
 ul.nav li.dropdown:hover ul.dropdown-menu{
     display: block;
 }
