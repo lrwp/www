@@ -9,7 +9,9 @@ $(function () {
         $events = $('#events'),
         cache = { species: {} };
     
-    $slideshow.carousel();
+    $slideshow.carousel({
+        interval: 7500
+    });
 
     // Show/Hide Carousel Controls
     $slideshow.hover(function () {
