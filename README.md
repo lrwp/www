@@ -13,9 +13,6 @@ The Website
 * Show ajax status on save button.
 * Make Join/Donate button affixed to top of page.
 * Add Google Analytics.
-* Ajaxable pages.
 * Allow news, events and wildlife to have icons.
 * Create rewrites for all old php pages
 * Add location to events
-* Save user agent in management area
-* Warn user if their time is off
