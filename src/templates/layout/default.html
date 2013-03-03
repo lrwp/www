@@ -6,9 +6,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <link rel="stylesheet" href="/css/global.css"/>
-    {{^schema}}
-        <link rel="stylesheet" href="/css/index.css"/>
-    {{/schema}}
+    {{#style}}
+        <link rel="stylesheet" href="{{style}}"/>
+    {{/style}}
     {{#microformat}}
         <link rel="profile" href="http://microformats.org/profile/hcalendar"/>
     {{/microformat}}
@@ -23,113 +23,23 @@
 <body>
 <div class="container">
 
-    <!-- Banner -->
-    <div class="row">
-        <div id="header" class="span12">
-            {{#user.name}}
-                {{#schema}}<a id="edit-page" href="/manage#{{id}}" title="Logged in as {{user.name}}"><i class="icon-pencil icon-white"></i>&nbsp;Edit Page</a>{{/schema}}
-            {{/user.name}}
-            <a id="join" href="joindonate.php">Join/Donate</a>
-            <a href="/" title="Return to the home page"><img src="/img/logo.png" alt="LRWP Frog Logo"/></a>
-        </div>
-    </div>
+    {{> banner}}
 
-    <!-- Navigation -->
-    <div class="row">
-        <div class="navbar navbar-inverse span12">
-            <div class="navbar-inner">
-                <ul class="nav">
-                    <li class="dropdown">
-                        <a href="/page/about" role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">About Us</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li role="menuitem"><a href="/page/about#mission">Our Mission</a></li>
-                            <li role="menuitem"><a href="/page/boards-staff">Boards &amp; Staff</a></li>
-                            <li role="menuitem"><a href="/page/committees">Committees</a></li>
-                            <li role="menuitem"><a href="/page/community-partners">Community Partners</a></li>
-                            <li role="menuitem"><a href="/news">News &amp; Updates</a></li>
-                            <li role="menuitem" class="divider"></li>
-                            <li role="menuitem"><a href="#"><i class="icon-envelope"></i> Contact Us</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="/page/eagle-marsh" role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">Our Preserves</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li role="menuitem"><a href="/page/eagle-marsh">Eagle Marsh</a></li>
-                            <li role="menuitem"><a href="/page/arrowhead">Arrowhead Preserves</a></li>
-                            <li role="menuitem"><a href="/page/little-river-landing">Little River Landing</a></li>
-                            <li role="menuitem"><a href="/page/habitats">Habitats &amp; Wildlife</a></li>
-                            <li role="menuitem" class="divider"></li>
-                            <li role="menuitem"><a href="/page/trailmaps"><i class="icon-map-marker"></i> Trail Maps &amp; Directions</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="/page/join-donate" role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">Join/Donate</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li role="menuitem"><a href="/page/honor">Honor a Loved One</a></li>
-                            <li role="menuitem"><a href="/page/legacy">Leave a Legacy</a></li>
-                            <li role="menuitem"><a href="/page/community-partners">Community Partners</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="/volunteer" role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">Volunteer</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li role="menuitem"><a href="/volunteer">Opportunities</a></li>
-                            <li role="menuitem"><a href="/volunteer-application">Application</a></li>
-                            <li role="menuitem" class="divider"></li>
-                            <li role="menuitem"><a href="#"><i class="icon-envelope"></i> Contact Us</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="/events" role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">Events/Programs</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li role="menuitem"><a href="/events">Upcoming Events</a></li>
-                            <li role="menuitem"><a href="/volunteer">Volunteer Events</a></li>
-                            <li role="menuitem"><a href="/special">Special Events</a></li>
-                            <li role="menuitem" class="divider"></li>
-                            <li role="menuitem"><a href="#"><i class="icon-envelope"></i> Contact Us</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="/page/wetlands-info" role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">Wetlands Info</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li role="menuitem"><a href="/page/wetlands-info">How Wetlands Work</a></li>
-                            <li role="menuitem"><a href="/page/habitats">Habitats &amp; Wildlife</a></li>
-                            <li role="menuitem"><a href="/page/conserve-land">Conserve Land</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="/page/our-valley" role="button" class="dropdown-toggle dropdown-link" data-toggle="dropdown">Our Valley</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li role="menuitem"><a href="/page/history">History</a></li>
-                            <li role="menuitem"><a href="/page/great-marsh">The Great Marsh</a></li>
-                            <li role="menuitem"><a href="/page/geology">Geology</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form id="search-widget" class="navbar-search pull-right">
-                  <input type="text" placeholder="Search..."><i class="icon-search"></i>
-                </form>
-            </div>
-        </div>
-    </div>
+    {{> navigation}}
 
-    <div class="{{#schema}}wrap{{/schema}}">
+    <div class="wrap">
         {{{body}}}
     </div>
 
 </div>
 
-<div id="footer">
-    &copy; {{year}} Little River Wetlands Project
-</div>
+{{> footer}}
 
 <script src="//code.jquery.com/jquery-1.8.2.min.js"></script>
 <script src="/js/bootstrap-custom.js"></script>
-{{^schema}}
-    <script src="/js/index.js"></script>
-{{/schema}}
 {{#script}}
     <script src="{{script}}"></script>
 {{/script}}
 </body>
+<!-- default -->
 </html>
