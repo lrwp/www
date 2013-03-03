@@ -15,6 +15,7 @@ $(function () {
         $attach = $('#attach'),
         $docs = $('#docs'),
         $docsShow = $('#show-docs'),
+        $notes = $('#doc-notes-content'),
         userCtx,
         ids = [], parts,
         getIds = function(callback) {
@@ -294,7 +295,10 @@ $(function () {
                 if (window.location.hash) {
                     $(window.location.hash).click();
                 } else {
-                    $docs.fadeIn();
+                    $.get('/page/manage-notes?xhr', function (content) {
+                        $notes.html(content);
+                        $docs.fadeIn();
+                    });
                 }
             });
        } else {
