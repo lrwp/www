@@ -10,7 +10,6 @@ The Website
 * Fix Time offsets for events.
 * Create a Proper 404 page.
 * Use JSV client side too.
-* Cronjob to remove expired events.
 * Show ajax status on save button.
 * Make Join/Donate button affixed to top of page.
 * Add Google Analytics.
