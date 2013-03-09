@@ -6,6 +6,7 @@ The Website
 # To Do
 * jslintify everything
 * Allow revision navigation.
+* Show "Today" on events that are happening today
 * Get Wildlife via Ajax on homepage.
 * Use JSV client side too.
 * Show ajax status on save button.

@@ -1,0 +1,43 @@
+<div class="row">
+
+    <div class="span8">
+        <h3>News Briefs</h3>
+        {{#brief}}
+           <h4>
+                <a href="/news/#{{_id}}">{{title}}</a>
+           </h4>
+            <div>
+                {{{content}}}
+            </div>
+        {{/brief}}
+    </div>
+
+    <!-- MailChimp Signup Form -->
+    <div class="span4">
+        <div id="mc_embed_signup">
+            <form action="http://lrwp.us4.list-manage.com/subscribe/post?u=4d14a5e76dce4b1131c92d50b&amp;id=6959d5cb0b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                <label for="mce-EMAIL">Sign up for our E-News</label>
+                <input type="email" value="" name="EMAIL" class="email input-medium" id="mce-EMAIL" placeholder="email address" required/>
+                <button type="submit" id="mc-embedded-subscribe" class="btn"><i class="icon-envelope"></i>&nbsp;Subscribe</button>
+            </form>
+            <iframe src="//www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2FLittleRiverWetlands&amp;layout=standard&amp;show_faces=false&amp;colorscheme=light&amp;font&amp;width=290&amp;appId=442210212516888" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:290px;height:50px;" allowTransparency="true"></iframe>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div id="news" class="span12">
+        <h3>News Updates</h3>
+        {{#news}}
+           <h4 id="{{_id}}">
+                <a href="/news/#{{_id}}">{{title}}</a>
+           </h4>
+            <div class="news-content">
+                {{{content}}}
+            </div>
+        {{/news}}
+    </div>
+
+</div>

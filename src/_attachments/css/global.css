@@ -12,6 +12,12 @@ body {
     padding-bottom:20px;
 }
 
+.nowrap {
+    padding-left:0;
+    padding-right:0;
+    padding-bottom:0;
+}
+
 /* bootstrap ovverides */
 .navbar-inverse .navbar-inner {
     border-color: #005935;

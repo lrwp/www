@@ -26,6 +26,13 @@
     }
 },
 {
+    "from": "news",
+    "to": "_list/news/news",
+    "query": {
+        "include_docs": "true"
+    }
+},
+{
     "from": "volunteer",
     "to": "_list/event-page/event-volunteer",
     "query": {

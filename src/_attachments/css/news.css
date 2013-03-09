@@ -1,0 +1,33 @@
+h4 {
+    padding-top:10px;
+}
+
+#news {
+    margin-top:20px;
+}
+
+.news-content {
+    padding-bottom:10px;
+}
+
+#mc_embed_signup {
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, .065);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .065);
+    padding:10px;
+    margin-top:20px;
+}
+
+#mc_embed_signup label {
+    font-size:22px;
+    text-align:center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+#mce-EMAIL {
+    margin-top:10px;
+}
