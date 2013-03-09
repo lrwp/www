@@ -3,6 +3,15 @@ www
 
 The Website
 
+# Pages to convert
+* About Us/Our Mission
+* Eagle Marsh
+* Arrowhead Preserves
+* Little River Landing
+* Volunteer Application
+* Geology
+* Contact Us
+
 # To Do
 * jslintify everything
 * Allow revision navigation.
