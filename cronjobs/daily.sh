@@ -4,6 +4,8 @@
 
     'use strict';
 
+    console.log(new Date());
+
     var
         fs = require('fs'),
         cfg = JSON.parse(fs.readFileSync('/etc/sites/lrwp.json', 'utf-8')),
@@ -62,5 +64,4 @@
 
             });
         });
-
 }());
