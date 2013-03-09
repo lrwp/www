@@ -10,7 +10,20 @@ function(head, req) {
             xhr = req.query.hasOwnProperty('xhr');
 
         if (!page) {
-            return this.templates.layout.e404;
+            page = {
+                id: null,
+                doc: {
+                    title: 'Page not found',
+                    layout: 'default',
+                    content: this.templates['404'],
+                    modified: null,
+                    author: null,
+                    description: null,
+                    keywords: null,
+                    script: null,
+                    style: '/css/404.css' 
+                }
+            };
         }
 
         // Render the view

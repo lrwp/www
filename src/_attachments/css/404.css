@@ -1,0 +1,26 @@
+h1 {
+    text-align:center;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+img {
+    float:left;
+    margin-right:20px;
+}
+
+h3 {
+    color:#555;
+    padding-top:20px;
+}
+
+h4 {
+    color: #666;
+    margin-top:40px;
+}
+
+#search404 {
+    width: 380px;
+    margin-right: 20px;
+    margin-top: 10px; 
+}
