@@ -20,7 +20,7 @@ function(head, req) {
                     author: null,
                     description: null,
                     keywords: null,
-                    script: null,
+                    script: '/js/404.js',
                     style: '/css/404.css' 
                 }
             };
