@@ -22,5 +22,5 @@ The Website
 * Make Join/Donate button affixed to top of page.
 * Add Google Analytics.
 * Allow news, events and wildlife to have icons.
-* Create rewrites for all old php pages
-* Add location to event microformats
+* Create rewrites for last few old pages. 
+* Add location to event for microformats

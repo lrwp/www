@@ -53,6 +53,23 @@
     "from": "manage",
     "to": "_list/manage/all-by-schema"
 },
+{"from": "news.php", "to": "_list/news/news", "query": { "include_docs": "true"}},
+{"from": "events.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "events"}},
+{"from": "special_events.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "special"}},
+{"from": "boardsstaff.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "boards-staff"}},
+{"from": "committees.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "committees"}},
+{"from": "communitypartners.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "community-partners"}},
+{"from": "trailmaps.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "trailmaps"}},
+{"from": "habitats.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "habitats"}},
+{"from": "joindonate.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "join-donate"}},
+{"from": "donate_honor.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "honor"}},
+{"from": "legacy.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "legacy"}},
+{"from": "volunteer.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "volunteer"}},
+{"from": "wetlandsinfo.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "wetlands-info"}},
+{"from": "conserve.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "conserve"}},
+{"from": "ourvalley.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "our-valley"}},
+{"from": "history.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "history"}},
+{"from": "great_marsh.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "great-marsh"}},
 {
     "from": "*",
     "to": "*"
