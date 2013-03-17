@@ -208,7 +208,7 @@
                     });
                 }
             });
-        } 
+        }
     };
 
     window.SchemaHelper = SchemaHelper;
