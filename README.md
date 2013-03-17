@@ -1,9 +1,7 @@
 www
 ===
 
-The Website
-
-
+The Website. [![Build Status](https://api.travis-ci.org/lrwp/www.png)](https://travis-ci.org/lrwp/www)
 
 # Pages to convert
 * About Us/Our Mission
