@@ -4,11 +4,11 @@ $(function () {
 
     var
         $slideshow = $('#slideshow'),
-        $control= $slideshow.find('.carousel-control'),
+        $control = $slideshow.find('.carousel-control'),
         $species = $('.species'),
         $events = $('#events'),
         cache = { species: {} };
-    
+
     $slideshow.carousel({
         interval: 7500
     });
@@ -19,11 +19,11 @@ $(function () {
     }, function () {
         $control.fadeOut();
     });
-   
+
     // Handle slide links 
     $slideshow.on('click', '.carousel-inner', function () {
         var $active = $(this).find('.active[data-link]');
-        
+
         if ($active.length) {
             window.location = $active.attr('data-link');
         }
@@ -36,7 +36,7 @@ $(function () {
         $target.modal({
             show: false
         });
-        
+
         $this.click(function () {
             var id = $this.attr('data-id');
             if (!cache.species.hasOwnProperty(id)) {
@@ -52,6 +52,6 @@ $(function () {
     });
 
     $.get('/_list/event/public-event?limit=6&include_docs=true', function (res) {
-       $events.html(res); 
+        $events.html(res);
     });
 });

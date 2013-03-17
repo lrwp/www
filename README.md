@@ -3,6 +3,8 @@ www
 
 The Website
 
+
+
 # Pages to convert
 * About Us/Our Mission
 * Eagle Marsh
@@ -13,7 +15,8 @@ The Website
 * Contact Us
 
 # To Do
-* jslintify everything
+* Save "deleted" briefs and updates (and events?)
+* Only show "active" on homepage, paginate non-active
 * Allow revision navigation.
 * Show "Today" on events that are happening today
 * Get Wildlife via Ajax on homepage.

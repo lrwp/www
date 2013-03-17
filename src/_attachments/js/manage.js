@@ -2,6 +2,9 @@ $(function () {
     'use strict';
 
     var
+        SchemaHelper = window.SchemaHelper,
+        CKEDITOR = window.CKEDITOR,
+        Mustache = window.Mustache,
         schemaList = null,
         $new = $('.schema-new'),
         $form = $('#schema-form'),
@@ -18,28 +21,42 @@ $(function () {
         $notes = $('#doc-notes-content'),
         userCtx,
         ids = [], parts,
-        getIds = function(callback) {
-            $.getJSON('/_uuids?count=25', function(response){ 
+        getIds = function (callback) {
+            $.getJSON('/_uuids?count=25', function (response) {
                 ids = response.uuids;
                 callback();
-            }); 
+            });
         },
         docListTpl = '<li role="menuitem"><a data-schema="{{schema}}" class="schema-edit" title="Created {{created}} by {{author}}" id="{{id}}">{{title}}</a></li>',
         updateDocs = function (schema) {
-           $.getJSON('_view/all-by-schema?key="'+schema+'"', function (response) {
-                var $doclist = $('.doclist[data-schema='+schema+']');
+            $.getJSON('_view/all-by-schema?key="' + schema + '"', function (response) {
+                var $doclist = $('.doclist[data-schema=' + schema + ']');
                 $doclist.nextAll('li').remove();
-                $.each(response.rows, function(i) {
+                $.each(response.rows, function (i) {
                     response.rows[i].value.id = response.rows[i].id;
-                    $doclist.parent().append(Mustache.render(docListTpl, response.rows[i].value));
+                    $doclist.parent().append(Mustache.render(docListTpl,
+                        response.rows[i].value));
                 });
-           }); 
+            });
         },
         getCurrentId = function () {
             return $form.find('[name=_id]').val();
         },
         getCurrentRev = function () {
             return $form.find('[name=_rev]').val();
+        },
+        UploadHelper = {
+            options: {},
+            init: function () {
+                var self = UploadHelper;
+                if (self.options.value) {
+                    $.each(self.options.value, function (index) {
+                        self.options.input.parent().append('<span class="label label-info label-upload" data-title="' + index + '"> ' + index + ' <button type="btn" class="close">&times;</button></span>');
+                    });
+                    self.options.input.val(JSON.stringify(self.options.value));
+                }
+                self.options.input.parent().append('<button type="button" class="uploader btn">Upload</button>');
+            }
         };
 
     $form.on('hover', '.label-upload', function () {
@@ -50,38 +67,25 @@ $(function () {
             lname = name.toLowerCase();
 
         if (lname.indexOf('.jpg') !== -1 || lname.indexOf('.jpeg') !== -1 || lname.indexOf('.png') !== -1 || lname.indexOf('.gif') !== -1) {
-            $this.attr('data-content', '<img src="'+'/api/'+ id + '/' + name +'"/><br /><a target="_blank" href="/api/'+id+'/'+name+'">Click to view</a>');
+            $this.attr('data-content', '<img src="/api/' + id + '/' + name + '"/><br /><a target="_blank" href="/api/' + id + '/' + name + '">Click to view</a>');
         } else {
             $this.attr({
-                'data-content': '<a target="_blank" href="/api/'+id+'/'+name+'">Click to view</a>',
-                'title': 'Click for preview'});
+                'data-content': '<a target="_blank" href="/api/' + id + '/' + name + '">Click to view</a>',
+                'title': 'Click for preview'
+            });
         }
 
         if (!$this.attr('data-init')) {
-            
+
             $this.popover({
                 html: true,
                 trigger: 'click',
                 placement: 'bottom'
             }).popover('show');
-            
+
             $this.attr('data-init', 1);
         }
     });
-
-    var UploadHelper = {
-        options: {},
-        init: function() {
-            var self = UploadHelper;
-            if (self.options.value) {
-                $.each(self.options.value, function (index) {
-                    self.options.input.parent().append('<span class="label label-info label-upload" data-title="'+index+'"> '+index+' <button type="btn" class="close">&times;</button></span>');
-                });
-                self.options.input.val(JSON.stringify(self.options.value));
-            }                
-            self.options.input.parent().append('<button type="button" class="uploader btn">Upload</button>');
-        }
-    };
 
     SchemaHelper.options = {
         $form: $form,
@@ -92,7 +96,7 @@ $(function () {
                 tpl: SchemaHelper.defaults.hidden.tpl,
                 submit: function ($self) {
                     if (!$self.val()) {
-                       $self.val(ids.pop()); 
+                        $self.val(ids.pop());
                     }
                     return $self.val();
                 }
@@ -117,11 +121,11 @@ $(function () {
                 render: function ($self, value) {
                     UploadHelper.options = {
                         input: $self,
-                        value: value 
+                        value: value
                     };
                     UploadHelper.init();
                 },
-                submit: function($self) {
+                submit: function ($self) {
                     return $self.val() ? JSON.parse($self.val()) : null;
                 }
             },
@@ -150,9 +154,9 @@ $(function () {
             start: SchemaHelper.defaults.date,
             end: SchemaHelper.defaults.date,
             modified: {
-                tpl: SchemaHelper.defaults.readonly.tpl, 
+                tpl: SchemaHelper.defaults.readonly.tpl,
                 submit: function ($self) {
-                   return (new Date()).toISOString(); 
+                    return (new Date()).toISOString();
                 }
             }
         }
@@ -164,12 +168,12 @@ $(function () {
         SchemaHelper.toForm(schemaList[name], name);
     });
 
-   $form.parent().submit(function () {
+    $form.parent().submit(function () {
         var
             $this = $(this),
             callback = function (response) {
                 if (response.error) {
-                    alert(response.error +': '+ response.reason);
+                    window.alert(response.error + ': ' + response.reason);
                 } else {
                     updateDocs(response.schema);
                     $save.popover({
@@ -179,10 +183,10 @@ $(function () {
                         content: 'This document has been saved.',
                         trigger: 'manual'
                     });
-                 
+
                     $save.popover('show');
 
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $delete.fadeIn();
                         $save.popover('hide');
                     }, 2500);
@@ -191,7 +195,7 @@ $(function () {
 
         // Make sure we have some IDs available
         if (!ids.length) {
-            getIds(function() {
+            getIds(function () {
                 SchemaHelper.toJSON(callback);
             });
             return false;
@@ -200,7 +204,7 @@ $(function () {
         return false;
     });
 
-    $logout.click(function (){
+    $logout.click(function () {
         $.ajax({
             url: '_session',
             type: 'DELETE',
@@ -213,13 +217,14 @@ $(function () {
     $edit.on('click', '.schema-edit', function () {
         $docs.hide();
         var $this = $(this);
-        $.getJSON('/api/' + this.id, function(response){
-            SchemaHelper.toForm(schemaList[response.schema], response.schema, response); 
+        $.getJSON('/api/' + this.id, function (response) {
+            SchemaHelper.toForm(schemaList[response.schema],
+                response.schema, response);
         });
-     });
+    });
 
     $delete.click(function () {
-        if (confirm('Are you sure you want to delete this item?')) {
+        if (window.confirm('Are you sure you want to delete this item?')) {
             $.ajax({
                 url: 'api/' + $form.find('[name=_id]').val() + '?rev=' + $form.find('[name=_rev]').val(),
                 type: 'DELETE',
@@ -227,15 +232,15 @@ $(function () {
                     updateDocs($form.find('[name=schema]').val());
                     SchemaHelper.emptyForm();
                 },
-                error: function(response) {
-                    alert('Error ' + response.error +': '+ response.reason);
+                error: function (response) {
+                    window.alert('Error ' + response.error + ': ' + response.reason);
                 }
             });
         }
         return false;
     });
 
-    $save.click(function(){
+    $save.click(function () {
         $form.parent().submit();
     });
 
@@ -247,7 +252,7 @@ $(function () {
             $attach.find('[name=_rev]').val(rev);
             $attach.modal();
         } else {
-            alert('You must save the document before you may upload.');
+            window.alert('You must save the document before you may upload.');
         }
     });
 
@@ -268,7 +273,7 @@ $(function () {
             var result = JSON.parse($frame.contents().text());
             $frame.remove();
             if (result.error) {
-                alert(result.error + ': ' + result.reason);
+                window.alert(result.error + ': ' + result.reason);
             } else {
                 $attach.modal('hide');
                 $('#' + getCurrentId()).click();
@@ -283,11 +288,11 @@ $(function () {
         $docs.fadeIn();
     });
 
-    $.getJSON('_session', function(response) {
+    $.getJSON('_session', function (response) {
         userCtx = response.userCtx;
         if (userCtx.roles.indexOf('_admin') !== -1 || userCtx.roles.indexOf('lrwp') !== -1) {
             $user.text(userCtx.name);
-            $.getJSON('/_show/schema', function(response) {
+            $.getJSON('/_show/schema', function (response) {
                 schemaList = response.schema;
                 $nav.fadeIn();
 
@@ -301,12 +306,12 @@ $(function () {
                     });
                 }
             });
-       } else {
+        } else {
             $login.modal({
                 keyboard: false,
                 backdrop: 'static'
             });
-       }
+        }
     });
 
 });
