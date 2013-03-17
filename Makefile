@@ -52,5 +52,13 @@ build:
 push:
 	cd build && erica push
 
+lint:
+
+	# Lint JavaScript
+	for j in src/_attachments/js/*.js; do \
+		echo "Linting $$j"; \
+		node_modules/.bin/jslint --nomen --predef "$$" --browser "$$j"; \
+	done
+
 clean:
 	rm -rf build
