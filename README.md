@@ -17,7 +17,6 @@ The Website
 # To Do
 * Save "deleted" briefs and updates (and events?)
 * Only show "active" on homepage, paginate non-active
-* jslintify everything
 * Allow revision navigation.
 * Show "Today" on events that are happening today
 * Get Wildlife via Ajax on homepage.
