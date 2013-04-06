@@ -12,7 +12,6 @@ The Website.
 * Little River Landing
 * Volunteer Application
 * Geology
-* Contact Us
 
 # To Do
 * Save "deleted" briefs and updates (and events?)
