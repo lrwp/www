@@ -164,3 +164,16 @@ ul.nav li.dropdown:hover ul.dropdown-menu{
     padding-bottom: 10px;
 }
 
+/* Contact Us Dialog */
+#contactModalLabel i {
+    vertical-align: middle;
+}
+
+#contactModal .vcard {
+    text-align: center;
+}
+
+#contactOk {
+    display:none;
+    text-align:center;
+}

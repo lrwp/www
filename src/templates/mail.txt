@@ -1,0 +1,15 @@
+New Message:
+
+Name: {{name}}
+Email: {{email}}
+{{#phone}}Phone: {{phone}}{{/phone}}
+
+{{message}}
+
+
+---------------------------
+Date: {{date}}
+URL: {{url}}
+Referrer: {{referer}}
+User Agent: {{agent}}
+IP Address: {{ip}}

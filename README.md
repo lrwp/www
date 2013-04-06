@@ -27,6 +27,7 @@ The Website.
 * Allow news, events and wildlife to have icons.
 * Create rewrites for last few old pages. 
 * Add location to event for microformats
+* Add Analytics to global.js
 
 # Help Wanted
 * Apple touch icons

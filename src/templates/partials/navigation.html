@@ -11,7 +11,7 @@
                         <li role="menuitem"><a href="/page/community-partners">Community Partners</a></li>
                         <li role="menuitem"><a href="/news">News &amp; Updates</a></li>
                         <li role="menuitem" class="divider"></li>
-                        <li role="menuitem"><a href="#"><i class="icon-envelope"></i>&nbsp;Contact Us</a></li>
+                        <li role="menuitem"><a href="#contactModal" data-toggle="modal"><i class="icon-envelope"></i>&nbsp;Contact Us</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -39,7 +39,7 @@
                         <li role="menuitem"><a href="/volunteer">Opportunities</a></li>
                         <li role="menuitem"><a href="/volunteer-application">Application</a></li>
                         <li role="menuitem" class="divider"></li>
-                        <li role="menuitem"><a href="#"><i class="icon-envelope"></i>&nbsp;Contact Us</a></li>
+                        <li role="menuitem"><a href="#contactModal" data-toggle="modal"><i class="icon-envelope"></i>&nbsp;Contact Us</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -49,7 +49,7 @@
                         <li role="menuitem"><a href="/volunteer">Volunteer Events</a></li>
                         <li role="menuitem"><a href="/special">Special Events</a></li>
                         <li role="menuitem" class="divider"></li>
-                        <li role="menuitem"><a href="#"><i class="icon-envelope"></i>&nbsp;Contact Us</a></li>
+                        <li role="menuitem"><a href="#contactModal" data-toggle="modal"><i class="icon-envelope"></i>&nbsp;Contact Us</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -73,5 +73,69 @@
               <input type="text" placeholder="Search..."><i class="icon-search"></i>
             </form>
         </div>
+    </div>
+</div>
+<div id="contactModal" class="modal hide fade" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="contactModalLabel"><i class="icon-envelope"></i>&nbsp;Contact Us</h3>
+    </div>
+    <div class="modal-body">
+        <div class="vcard">
+            <b class="fn org">Little River Wetlands Project</b><br />
+            <span class="tel">(260) 478-2515</span><br>
+            <p class="adr">
+                <span class="street-address">7209 Engle Road</span><br>
+                <span class="extended-address">Suite 200</span><br>
+                <span class="locality">Fort Wayne</span>,&nbsp;<span class="region">IN</span>&nbsp;46804
+            </p>
+        </div>
+        <div id="contactOk">
+            <h1>Thanks!</h1>
+            <b>Your message has been sent.</b>
+        </div>
+        <form id="contactForm" class="form-horizontal" method="post" action="/sendemail">
+            <div class="control-group">
+                <label class="control-label">Send message to:&nbsp;</label>
+                <div class="controls">
+                    <select name="who">
+                        <option value="0">General Inquiries</option>
+                        <option value="1">Sean Nolan, Executive Director</option>
+                        <option value="2">Betsy Yankowiak, Director of Preserves and Programs</option>
+                        <option value="3">Liz Hincks, Environmental Education Coordinator</option>
+                        <option value="4">Website Issues</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Name:&nbsp;</label>
+                <div class="controls">
+                    <input name="name" type="text" placeholder="First Last" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Email:&nbsp;</label>
+                <div class="controls">
+                    <input name="email" type="email" placeholder="address@domain.tld" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Phone:&nbsp;</label>
+                <div class="controls">
+                    <input name="phone" type="tel" placeholder="(555)-555-5555"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Message:&nbsp;</label>
+                <div class="controls">
+                    <textarea name="message" placeholder="Your Message..." required></textarea>
+                </div>
+            </div>
+            <input type="hidden" name="url"/>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button id="contactSend" class="btn btn-primary">Send</button>
     </div>
 </div>

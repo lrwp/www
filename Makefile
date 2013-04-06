@@ -1,6 +1,12 @@
-build:
-	rm -rf build
+build: clean
+
+	# move everything in src into build
 	cp -r src build
+
+	# don't need node files in couch
+	# though .ericaignore should always prevent this
+	# from being pushed
+	rm -rf build/nodejs
 
 	# Minify templates
 	java -jar util/htmlcompressor-1.5.3.jar --remove-surrounding-spaces all --recursive --type html -o build/templates build/templates
