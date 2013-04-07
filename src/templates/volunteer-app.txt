@@ -1,0 +1,78 @@
+New Volunteer Application:
+
+Name: {{first}} {{middle}} {{last}}
+
+Address:
+{{address}}
+{{#address2}}{{address2}}{{/address2}}
+{{city}}, {{state}} {{zip}}
+
+
+Telephone: {{phone}}
+
+{{#email}}Email: {{email}}{{/email}}
+
+About how many hours per month do you wish to volunteer?
+{{hourspermonth}}
+
+
+When are you available to start?
+{{start}}
+
+
+Can you come in at a regular weekly time?
+{{regular}}
+
+
+{{#freq}}
+How often might you be available?
+{{freq}}
+
+{{/freq}}
+
+Would you prefer an 'as needed' schedule for special events or projects?
+{{asneeded}}
+
+
+{{#schedule}}
+Or some other schedule? (Please explain)
+{{schedule}}
+
+{{/schedule}}
+
+Your current availability:
+{{availability}}
+
+
+Please explain why you would like to volunteer for LRWP and what type work you might be interested in doing:
+{{why}}
+
+
+Please list skills and hobbies:
+{{skills}}
+
+
+Please list any recent work and volunteer activities:
+{{recent}}
+
+
+List the name, address, and telephone number of three references who are not related to you.
+{{ref}}
+
+
+Have you ever been convicted of a crime?
+{{crime}}
+
+
+{{#outcome}}
+Please state when, where and final outcome:
+{{outcome}}
+
+{{/outcome}}
+
+-------------------------------------------------------
+Date: {{date}}
+Referrer: {{referer}}
+User Agent: {{agent}}
+IP Address: {{ip}}
+

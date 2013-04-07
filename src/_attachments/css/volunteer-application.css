@@ -1,8 +1,8 @@
-textarea {
+#sendapp textarea {
     width:100%;
 }
 
-label {
+#sendapp label {
     margin-top:20px;
     font-weight: bold;
 }
@@ -40,7 +40,7 @@ label[for] {
     user-select: none;
 }
 
-.btn-large {
+#sendapp .btn-large {
     float: right;
     margin-top: 30px;
 }

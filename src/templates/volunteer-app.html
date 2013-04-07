@@ -1,45 +1,71 @@
 <h1>New Volunteer Application:</h1>
-<b>Name: </b> {{first}} {{middle}} {{last}}<br />
+<b>Name: </b> {{first}} {{middle}} {{last}}<br /><br />
 <b>Address: </b> <br />
 {{address}}<br />
 {{#address2}}{{address2}}<br />{{/address2}}
 {{city}}, {{state}} {{zip}}<br />
 <br />
-<b>Telephone: </b>{{phone}}<br />
-{{#email}}<b>Email: </b> {{email}}<br />{{/email}}
+<b>Telephone: </b>{{phone}}<br /><br/>
+{{#email}}<b>Email: </b> {{email}}<br /><br />{{/email}}
 <b>About how many hours per month do you wish to volunteer? </b>
-{{hourspermonth}}<br />
+{{hourspermonth}}<br /><br />
 
-<b>When are you available to start? </b> {{start}}<br />
+<b>When are you available to start? </b> {{start}}<br /><br />
 
-<b>Can you come in at a regular weekly time?</b> {{regular}}<br />
+<b>Can you come in at a regular weekly time?</b> {{regular}}<br /><br />
 
 {{#freq}}
-<b>How often might you be available?</b> {{freq}} <br />
+<b>How often might you be available?</b> <br />
+<pre>
+{{freq}} 
+</pre>
+<br /><br />
 {{/freq}}
 
-<b>Would you prefer an 'as needed' schedule for special events or projects?</b> {{asneeded}}<br />
+
+<b>Would you prefer an 'as needed' schedule for special events or projects?</b> {{asneeded}}<br /><br />
 
 {{#schedule}}
-<b>Or some other schedule? (Please explain)</b> {{schedule}} <br />
+<b>Or some other schedule? (Please explain)</b> <br />
+<pre>
+{{schedule}}
+</pre>
+<br /><br />
 {{/schedule}}
 
-<b>Your current availability:</b> {{availability}}<br />
+<b>Your current availability:</b><br />
+<pre>
+{{availability}}
+</pre><br /><br />
 
-<b>Please explain why you would like to volunteer for LRWP and what type work you might be interested in doing:</b>
-{{why}}<br />
+<b>Please explain why you would like to volunteer for LRWP and what type work you might be interested in doing:</b><br />
+<pre>
+{{why}}
+</pre><br /><br />
 
-<b>Please list skills and hobbies: </b> {{skills}} <br />
+<b>Please list skills and hobbies: </b><br />
+<pre>
+{{skills}}
+</pre><br /><br />
 
-<b>Please list any recent work and volunteer activities: </b> {{recent}} <br />
+<b>Please list any recent work and volunteer activities: </b><br />
+<pre>
+{{recent}}
+</pre><br /><br />
 
-<b>List the name, address, and telephone number of three references who are not related to you.</b>
-{{ref}}<br />
+<b>List the name, address, and telephone number of three references who are not related to you.</b><br />
+<pre>
+{{ref}}
+</pre><br /><br />
 
-<b>Have you ever been convicted of a crime?</b> {{crime}} <br />
+<b>Have you ever been convicted of a crime?</b> {{crime}} <br /><br />
 
 {{#outcome}}
-<b>Please state when, where and final outcome:</b> {{outcome}}
+<b>Please state when, where and final outcome:</b>
+<pre>
+{{outcome}}
+</pre>
+<br /><br />
 {{/outcome}}
 
 <br />
