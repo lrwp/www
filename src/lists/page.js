@@ -31,6 +31,7 @@ function(head, req) {
             return page.doc.content
         }
 
+
         return Mustache.to_html(this.templates.layout[page.doc.layout], {
                 title: page.doc.title,
                 body: page.doc.content,

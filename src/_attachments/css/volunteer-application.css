@@ -1,0 +1,46 @@
+textarea {
+    width:100%;
+}
+
+label {
+    margin-top:20px;
+    font-weight: bold;
+}
+
+.check {
+    width:100%;
+    margin-top:20px;
+    background: #eee;
+    height: 90px;
+    -webkit-box-shadow: 3px 3px 5px rgba(50, 50, 50, 0.15);
+    -moz-box-shadow:    3px 3px 5px rgba(50, 50, 50, 0.15);
+    box-shadow:         3px 3px 5px rgba(50, 50, 50, 0.15);
+    border: 1px solid #ccc;
+}
+
+.check input {
+    float:left;
+    width: 5%;
+    margin-top: 30px;
+}
+
+.check label {
+    float:left;
+    width:93%;
+}
+
+/* Allows the "for" attribute to behave as expected */
+label[for] {
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.btn-large {
+    float: right;
+    margin-top: 30px;
+}
