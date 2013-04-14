@@ -6,7 +6,6 @@ The Website.
 [![Build Status](https://api.travis-ci.org/lrwp/www.png)](https://travis-ci.org/lrwp/www)
 
 # Pages to convert
-* About Us/Our Mission
 * Eagle Marsh
 * Arrowhead Preserves
 * Little River Landing
@@ -27,3 +26,4 @@ The Website.
 * Add location to event for microformats
 * Add Analytics to global.js
 * Apple touch icons
+* Switch from closure/yui/htmlmin to grunt
