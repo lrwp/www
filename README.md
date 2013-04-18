@@ -6,9 +6,10 @@ The Website.
 [![Build Status](https://api.travis-ci.org/lrwp/www.png)](https://travis-ci.org/lrwp/www)
 
 # Pages to convert
-* Arrowhead Preserves
-* Little River Landing
 * Geology
+
+# Broke in IE
+* About Us
 
 # To Do
 * Save "deleted" briefs and updates (and events?)
