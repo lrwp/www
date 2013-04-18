@@ -1,0 +1,30 @@
+.wrap {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
+h2 {
+    margin-top: 10px;
+}
+
+.preserve-list ul {
+    margin-left:40px;
+    font-size:18px;
+    padding-top:10px;
+    list-style: none;
+    margin-left: 60px;
+}
+
+.preserve-list ul li {
+    padding-bottom: 18px;
+}
+
+.preserve-list h2 {
+    background: #eee;
+    border:1px solid #ddd;
+    padding-top:5px;
+    padding-left:10px;
+    padding-bottom:5px;
+    padding-right:5px;
+}
