@@ -177,3 +177,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu{
     display:none;
     text-align:center;
 }
+
+.cancellations {
+    padding-top:40px;
+}

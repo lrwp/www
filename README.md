@@ -6,10 +6,7 @@ The Website.
 [![Build Status](https://api.travis-ci.org/lrwp/www.png)](https://travis-ci.org/lrwp/www)
 
 # Pages to convert
-* Geology
-
-# Broke in IE
-* About Us
+* Geology (add more/less buttons and modals)
 
 # To Do
 * Save "deleted" briefs and updates (and events?)
@@ -24,6 +21,5 @@ The Website.
 * Allow news, events and wildlife to have icons.
 * Create rewrites for last few old pages. 
 * Add location to event for microformats
-* Add Analytics to global.js
 * Apple touch icons
 * Switch from closure/yui/htmlmin to grunt
