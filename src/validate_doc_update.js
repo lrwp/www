@@ -1,12 +1,17 @@
 function(newDoc, oldDoc, userCtx) {
 
+
     // Require Authentication
     if (!userCtx.name) {
         throw({forbidden : 'You must be logged in'});
     }
 
+    if (userCtx.roles.indexOf('_admin') !== -1) {
+        return;
+    }
+
     // Check Roles
-    if (userCtx.roles.indexOf('_admin') === -1 && userCtx.roles.indexOf('lrwp') === -1) {
+    if (userCtx.roles.indexOf('lrwp') === -1) {
         throw({forbidden: 'You are not a member of this database.'});
     }
 
