@@ -1,4 +1,4 @@
-#!/usr/local/bin/node
+#!/usr/bin/node
 // Remove old events
 (function (undefined) {
 
