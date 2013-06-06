@@ -17,9 +17,8 @@ The new LRWP Website: http://new.lrwp.org
 * Use JSV client side too.
 * Show ajax status on save button.
 * Make Join/Donate button affixed to top of page.
-* Add Google Analytics.
 * Allow news, events and wildlife to have icons.
-* Create rewrites for last few old pages. 
 * Add location to event for microformats
 * Apple touch icons
 * Switch from closure/yui/htmlmin to grunt
+* Have nginx capture couchdb 404 errors, redirect to 404 page.
