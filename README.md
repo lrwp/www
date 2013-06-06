@@ -1,7 +1,7 @@
 www
 ===
 
-The new LRWP Website: http://new.lrwp.org
+The LRWP Website: http://www.lrwp.org
 
 [![Build Status](https://api.travis-ci.org/lrwp/www.png)](https://travis-ci.org/lrwp/www)
 
