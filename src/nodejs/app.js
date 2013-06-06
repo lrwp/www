@@ -93,7 +93,7 @@
             res = this.res,
             POST = req.body,
             err = false,
-            to = 4;
+            to = 2;
 
         // We only do minimal checking of the volunteer app
         // If the volunteer failed to enter all the information
