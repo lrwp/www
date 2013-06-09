@@ -53,5 +53,15 @@ $(function () {
 
     $.get('/_list/event/public-event?limit=6&include_docs=true', function (res) {
         $events.html(res);
+
+        // Mark any events happeneing today.
+        var now = new Date();
+
+        $('.dtstart .value-title').each(function () {
+            var d = new Date(this.title);
+            if (d.getMonth() === now.getMonth() && d.getDate() === now.getDate()) {
+                $(this).parents('b').siblings('h4').append('<sup>Today!</sup>');
+            }
+        });
     });
 });

@@ -12,7 +12,6 @@ The LRWP Website: http://www.lrwp.org
 * Save "deleted" briefs and updates (and events?)
 * Only show "active", paginate non-active
 * Allow revision navigation.
-* Show "Today" on events that are happening today
 * Get Wildlife via Ajax on homepage.
 * Use JSV client side too.
 * Show ajax status on save button.
