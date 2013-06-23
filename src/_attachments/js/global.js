@@ -13,6 +13,10 @@ $(function () {
 
     $form.submit(function () {
         $form.find('[name=url]').val(window.location);
+        // I'm assuming most of the spam bots that we've been seeing
+        // aren't using javscript, if so this should stop most of them
+        // if not we'll have to add a captcha :(
+        $form.append('<input name="notabot" value="1"/>');
         $.ajax({
             url: '/sendemail',
             type: 'POST',
