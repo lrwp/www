@@ -18,6 +18,13 @@ build: clean
 		mv "$$j.out" "$$j"; \
 	done
 
+	# Minify Some libs
+	for j in build/_attachments/js/lib/bootstrap-custom.js; do \
+		echo "Compressing: $$j"; \
+		java -jar util/compiler.jar --warning_level QUIET --compilation_level SIMPLE_OPTIMIZATIONS --js_output_file "$$j.out" "$$j"; \
+		mv "$$j.out" "$$j"; \
+	done
+
 	# Minify Css
 	for c in build/_attachments/css/*.css; do \
 		echo "Minifying $$c"; \
@@ -52,6 +59,22 @@ build: clean
 		else \
 			echo "No savings: $$p"; \
 			rm "$$p.out"; \
+		fi \
+	done
+
+gzip: 
+
+	for i in $$(find build/ -name "*.js" -or -name "*.css"); do \
+		echo "Gziping $$i"; \
+		before=`wc -c < "$$i"`; \
+		gzip -9 -c "$$i" > "$$i.out"; \
+		after=`wc -c < "$$i.out"`; \
+		if [ "$$before" -gt "$$after" ]; \
+		then \
+			mv "$$i.out" "$$i.gz"; \
+		else \
+			echo "No savings: $$i"; \
+			rm "$$i.out"; \
 		fi \
 	done
 

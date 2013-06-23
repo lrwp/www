@@ -53,6 +53,7 @@
     "from": "manage",
     "to": "_list/manage/all-by-schema"
 },
+{"from": "about.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "about"}},
 {"from": "news.php", "to": "_list/news/news", "query": { "include_docs": "true"}},
 {"from": "events.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "events"}},
 {"from": "special_events.php", "to": "_list/page/page-by-link", "query": { "include_docs": "true", "key" : "special"}},
