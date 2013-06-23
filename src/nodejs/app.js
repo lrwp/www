@@ -18,6 +18,10 @@
             err = false,
             to;
 
+        if (!POST.notabot) {
+            err = "Blocked";
+        }
+
         if (!POST.name) {
             err = "Name is required";
         } else {
