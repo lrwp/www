@@ -32,7 +32,11 @@
             err = "Name can't exceed 64 characters";
         }
 
-        if (!POST.email || !check(POST.email).isEmail()) {
+	try {
+            if (!POST.email || !check(POST.email).isEmail()) {
+                err = "A valid email is required";
+            }
+	} catch (e) {
             err = "A valid email is required";
         }
 
