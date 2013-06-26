@@ -45,7 +45,6 @@
         "created": {
             "type": "string",
             "required": true,
-            "description": "News briefs are sorted ascending by create date. This date is also shown on the news and updates page."
         },
         "modified": {
             "type": "string"
@@ -53,6 +52,14 @@
         "author": {
             "type": "string",
             "required": true
+       },
+       "active": {
+            "type": "string"
+       },
+       "key": {
+           "type": "string",
+           "required": true,
+           "default": "active"
        }
     }
 }
