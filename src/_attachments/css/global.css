@@ -1,5 +1,5 @@
 body {
-    background-image: url(../img/bg0.png);
+    background-image: url(http://9420eeef545cf020b3b5-2b1ddef52c386a49dc239228c308680c.r48.cf2.rackcdn.com/bg0.png);
 }
 
 .hidden {
@@ -81,7 +81,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu{
 }
 
 #header {
-    background-image: url(../img/home_header.jpg);
+    background-image: url(http://9420eeef545cf020b3b5-2b1ddef52c386a49dc239228c308680c.r48.cf2.rackcdn.com/home_header.jpg);
     height: 200px;
 }
 
