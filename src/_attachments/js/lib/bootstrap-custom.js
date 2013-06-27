@@ -2101,3 +2101,18 @@ $(function () {
     });
 
 });
+
+//
+// Global JS
+//
+
+$(function () {
+
+    // Load contact form script only when it is needed
+    $('a[href=#contactModal]').one('click', function () {
+        $.getScript('/js/contact.js', function () {
+           $('#contactSend').removeClass('disabled');
+        });
+    });
+
+});
