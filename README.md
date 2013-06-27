@@ -22,4 +22,3 @@ The LRWP Website: http://www.lrwp.org
 * Switch from closure/yui/htmlmin to grunt
 * Have nginx capture couchdb 404 errors, redirect to 404 page.
 * Generate sitemap from pages.
-* Combine bootstrap and global css files.
