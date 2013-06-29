@@ -1,2 +1,3 @@
 User-agent: *
 Disallow: /manage/
+Sitemap: http://www.lrwp.org/sitemap.xml
