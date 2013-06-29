@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /manage/
+Disallow: /page/manage-notes
 Sitemap: http://www.lrwp.org/sitemap.xml
