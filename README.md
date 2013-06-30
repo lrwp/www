@@ -9,8 +9,6 @@ The LRWP Website: http://www.lrwp.org
 * Geology (add more/less buttons and modals)
 
 # To Do
-* Save "deleted" briefs and updates (and events?)
-* Only show "active", paginate non-active
 * Allow revision navigation.
 * Get Wildlife via Ajax on homepage.
 * Use JSV client side too.
@@ -21,3 +19,4 @@ The LRWP Website: http://www.lrwp.org
 * Apple touch icons
 * Switch from closure/yui/htmlmin to grunt
 * Have nginx capture couchdb 404 errors, redirect to 404 page.
+* Schdule Monthly Compaction

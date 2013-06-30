@@ -43,6 +43,10 @@
             "type": "string",
             "required": true
         },
+        "archive": {
+            "type": "boolean",
+            "description": "When checked, this item will not show up with other items on the website."
+        },
         "key": {
             "type": "string",
             "required": true,

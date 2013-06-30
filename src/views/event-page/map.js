@@ -7,7 +7,7 @@ function(doc) {
         emit(doc.schema, null);
     }
 
-    if (doc.schema === 'event') {
+    if (doc.schema === 'event' && !doc.archive) {
         emit(doc.start, null);
     }
 

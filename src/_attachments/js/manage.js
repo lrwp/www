@@ -141,6 +141,15 @@ $(function () {
                     return CKEDITOR.instances[$self.attr('name')].getData();
                 }
             },
+            archive: {
+                tpl: '<li><label data-content="{{description}}">{{name}}</label><input name="{{name}}" type="checkbox"/></li>',
+                render: function ($self, value) {
+                    $self.attr('checked', value);
+                },
+               submit: function ($self, value) {
+                    return $self[0].checked;
+               }
+            },
             schema: {
                 tpl: '<li class="hidden"><input type="hidden" name="{{name}}" value="{{schema}}" {{required}}/></li>'
             },

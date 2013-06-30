@@ -6,7 +6,7 @@ function(doc) {
         emit(doc.schema, null);
     }
 
-    if (doc.schema === 'event' && doc.category === "Volunteer Opportunities") {
+    if (doc.schema === 'event' && doc.category === "Volunteer Opportunities" && !doc.archive) {
         emit(doc.start, null);
     }
 

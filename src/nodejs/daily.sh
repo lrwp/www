@@ -1,5 +1,5 @@
 #!/usr/bin/node
-// Remove old events
+// Archive old events
 (function (undefined) {
 
     'use strict';
@@ -14,7 +14,7 @@
             method: 'GET',
             hostname: cfg.db.host,
             port: cfg.db.port,
-            path: '/lrwp/_design/www/_view/event-by-end'
+            path: '/'+cfg.db.db+'/_design/www/_view/event-by-end/?include_docs=true'
         },
         req = http.get(reqOpt, function (res) {
             var data = '';
@@ -31,21 +31,21 @@
 
                 for (ea in events.rows) {
                     if (events.rows[ea].key < now) {
-                        expired.push({ id : events.rows[ea].id, rev: events.rows[ea].value });
+                        expired.push(events.rows[ea]);
                     }
                 }
 
                 if (expired.length) {
 
-                    console.log('Expired Events', expired);
-
                     for (ea in expired) {
+                        expired[ea].doc.archive = true;
                         req2 = http.request({
-                            method: 'DELETE',
+                            method: 'PUT',
                             hostname: cfg.db.host,
                             port: cfg.db.port,
-                            path: '/' + cfg.db.db + '/' + expired[ea].id + '?rev=' + expired[ea].rev,
+                            path: '/' + cfg.db.db + '/' + expired[ea].id,
                             auth: cfg.db.user +':'+ cfg.db.pass
+                            
                         }, function(res){
                             var data = '';
                             res.on('data', function (chunk) {
@@ -55,6 +55,7 @@
                                 console.log(data);
                             });
                         });
+                        req2.write(JSON.stringify(expired[ea].doc), 'utf8');
                         req2.on('error', function(e){
                             console.log(e);
                         });
