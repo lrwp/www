@@ -1,5 +1,5 @@
 function(doc) {
-\
+
    'use strict';
  
    if (doc.schema && !doc.archive) {
