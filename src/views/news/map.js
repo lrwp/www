@@ -1,9 +1,10 @@
 function(doc) {
- 
+\
    'use strict';
-
-    if (doc.schema && doc.schema === 'news' || doc.schema === 'brief' && !doc.archive) {
-        emit(doc.rank, null);
+ 
+   if (doc.schema && !doc.archive) {
+        if (doc.schema === 'news' || doc.schema === 'brief') {
+            emit(doc.rank, null);
+        }
     }
-
 }
