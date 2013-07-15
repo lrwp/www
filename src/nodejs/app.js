@@ -18,6 +18,10 @@
             err = false,
             to;
 
+        if (!POST) {
+            POST = {};
+        }
+
         if (!POST.notabot) {
             err = "Blocked";
         }
