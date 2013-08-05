@@ -1,7 +1,9 @@
-www
-===
+LRWP.ORG
+========
 
-The LRWP Website: http://www.lrwp.org
+The Little River Wetalnds Project Website: http://www.lrwp.org
+
+Pull reqests are welcome!
 
 [![Build Status](https://api.travis-ci.org/lrwp/www.png)](https://travis-ci.org/lrwp/www)
 
