@@ -10,8 +10,11 @@ function(doc, req) {
             events = [];
 
         Moment.fn.formatInZone = function(format, offset) {
-            // adjust for dst
-            offset += 1;
+            if (this.month() >= 10 && this.date() >= 3) {
+                offset += 0;
+            } else if (this.year() === 2013) {
+                offset += 1;
+            }
             return this.clone().utc().add('hours', offset).format(format);
         }
 
@@ -35,7 +38,7 @@ function(doc, req) {
         }
 
         // Render the view
-       // return JSON.stringify(events, null, 4);
+       //return JSON.stringify(events, null, 4);
        return Mustache.to_html(this.templates.event, {events: events}, { event: this.templates.partials.event });
 
     });
