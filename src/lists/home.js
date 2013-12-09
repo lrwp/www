@@ -5,8 +5,6 @@ function(doc, req) {
     provides('html', function () {
         var
             Mustache = require('lib/Mustache'),
-            maxEvents = 6,
-            totalEvents = 0,
             ea, active = false, push,
             filename, hasFlora = false, hasFauna = false,
             date = new Date(),
@@ -39,14 +37,6 @@ function(doc, req) {
                 for (filename in ea.value._attachments) {
                     ea.value.image = '/api/' + ea.value.id + '/' + filename;
                 }
-            }
-
-            // Only show some events - perhaps we should get events via ajax instead?
-            if (ea.value.schema === 'event' && totalEvents < maxEvents) {
-                push = true;
-                totalEvents += 1;
-            } else if (ea.value.schema === 'event') {
-                push = false;
             }
 
             // We def need to move species and events into an ajax call instead
