@@ -64,4 +64,8 @@ $(function () {
             }
         });
     });
+
+    // if slide content has a class called 'slid-hide-me' then remove the content
+    $('.slide-hide-me').parents('.carousel-caption').hide();
+
 });

@@ -17,11 +17,10 @@ function(doc, req) {
             catOrder = ['Special Events', 'Saturday Hiking', 'Little River Ramblers', 'Breakfast on the Marsh', 'Volunteer Opportunities'];
 
         Moment.fn.formatInZone = function(format, offset) {
-            if (this.month() >= 10 && this.date() >= 3) {
-                offset += 0;
-            } else if (this.year() === 2013){
+
+            if (this.month() >= 2 && this.date() >= 9) {
                 offset += 1;
-            }
+            } 
 
             return this.clone().utc().add('hours', offset).format(format);
         }
