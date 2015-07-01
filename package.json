@@ -1,0 +1,24 @@
+{
+  "name": "lrwp.org",
+  "version": "1.0.0",
+  "description": "Website for Little River Wetlands Project.",
+  "dependencies": {
+    "director": "^1.2.0",
+    "jslint": "^0.1.9",
+    "trebuchet": "^1.1.0",
+    "validator": "^0.4.28"
+  },
+  "devDependencies": {
+    "jslint": "^0.1.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lrwp/www.git"
+  },
+  "author": "Travis Paul <Tr@visPaul.me>",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/lrwp/www/issues"
+  },
+  "homepage": "https://github.com/lrwp/www"
+}
