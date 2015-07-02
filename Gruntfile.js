@@ -56,6 +56,26 @@ module.exports = function(grunt) {
                      }
                  ]
              }
+        },
+        cssmin: {
+             build: {
+                 options: {
+                     report: "min",
+                     keepSpecialComments: 0
+                 },
+                 files: [
+                     {
+                         expand: true,
+                         cwd: "build/src/_attachments",
+                         src: [
+
+                             "css/**.css",
+                             "!css/**.min.css",
+                         ],
+                         dest: "build/src/_attachments"
+                     }
+                 ]
+             }
         }
     });
 
@@ -65,6 +85,7 @@ module.exports = function(grunt) {
         'copy',
         'clean:nodejs', // tmp hack until src is restructured
         'uglify',
+        'cssmin',
         'jshint'
     ]);
 
