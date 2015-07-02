@@ -9,6 +9,7 @@
     "validator": "^0.4.28"
   },
   "devDependencies": {
+    "grunt-cli": "^0.1.13",
     "grunt-contrib-jshint": "^0.11.2",
     "jslint": "^0.1.11"
   },
