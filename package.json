@@ -4,14 +4,12 @@
   "description": "Website for Little River Wetlands Project.",
   "dependencies": {
     "director": "^1.2.0",
-    "jslint": "^0.1.9",
     "trebuchet": "^1.1.0",
     "validator": "^0.4.28"
   },
   "devDependencies": {
     "grunt-cli": "^0.1.13",
-    "grunt-contrib-jshint": "^0.11.2",
-    "jslint": "^0.1.11"
+    "grunt-contrib-jshint": "^0.11.2"
   },
   "repository": {
     "type": "git",
