@@ -2,3 +2,4 @@ src/.couchapprc
 *.swp
 *.swo
 build
+node_modules
