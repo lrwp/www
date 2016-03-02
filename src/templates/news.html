@@ -12,8 +12,8 @@
         {{/brief}}
     </div>
 
-    <!-- MailChimp Signup Form -->
     <div class="span4">
+        <!-- MailChimp Signup Form -->
         <div id="mc_embed_signup">
             <form action="http://lrwp.us4.list-manage.com/subscribe/post?u=4d14a5e76dce4b1131c92d50b&amp;id=6959d5cb0b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
                 <label for="mce-EMAIL">Sign up for our E-News</label>
@@ -21,6 +21,14 @@
                 <button type="submit" id="mc-embedded-subscribe" class="btn"><i class="icon-envelope"></i>&nbsp;Subscribe</button>
             </form>
             <iframe src="//www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2FLittleRiverWetlands&amp;layout=standard&amp;show_faces=false&amp;colorscheme=light&amp;font&amp;width=285&amp;appId=442210212516888" style="border:none; overflow:hidden; width:285px;height:50px;"></iframe>
+        </div>
+        <div id="newsletter-printed">
+            <h4><i class="icon icon-file"></i>&nbsp;Download Newsletters</h4>
+            <ul>
+                {{#newsletter}}
+                    <li><a href="{{link}}">{{title}}</a></li>
+                {{/newsletter}}
+            </ul>
         </div>
     </div>
 

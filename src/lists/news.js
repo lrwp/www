@@ -9,11 +9,20 @@ function(doc, req) {
             date = new Date(),
             view = {
                 brief: [],
-                news: []
+                news: [],
+                newsletter: []
             };
 
         // Loop through all documents in view
         while (ea = getRow()) {
+
+            // Make attachments Mustache friendly
+            if (ea.doc.hasOwnProperty('_attachments')) {
+                for (filename in ea.doc._attachments) {
+                    ea.doc.link = '/api/' + ea.doc._id + '/' + filename;
+                }
+            }
+
             view[ea.doc.schema].push(ea.doc);
         }
 
