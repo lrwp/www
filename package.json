@@ -2,19 +2,14 @@
   "name": "lrwp.org",
   "version": "1.0.0",
   "description": "Website for Little River Wetlands Project.",
-  "dependencies": {
-    "director": "^1.2.0",
-    "trebuchet": "^1.1.0",
-    "validator": "^0.4.28"
-  },
   "devDependencies": {
-    "grunt-cli": "^0.1.13",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-copy": "^0.8.0",
-    "grunt-contrib-cssmin": "^0.12.3",
-    "grunt-contrib-jshint": "^0.11.2",
-    "grunt-contrib-uglify": "^0.9.1",
-    "grunt-mkdir": "^0.1.2"
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.2",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-mkdir": "^1.0.0"
   },
   "repository": {
     "type": "git",
@@ -25,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/lrwp/www/issues"
   },
-  "homepage": "https://github.com/lrwp/www"
+  "homepage": "https://github.com/lrwp/www",
+  "dependencies": {
+    "grunt": "^1.0.1"
+  }
 }
