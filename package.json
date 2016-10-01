@@ -9,7 +9,10 @@
     "grunt-contrib-cssmin": "^1.0.2",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-uglify": "^2.0.0",
-    "grunt-mkdir": "^1.0.0"
+    "grunt-couch": "^1.5.1",
+    "grunt-jsonlint": "^1.1.0",
+    "grunt-mkdir": "^1.0.0",
+    "load-grunt-tasks": "^3.5.2"
   },
   "repository": {
     "type": "git",
@@ -22,6 +25,7 @@
   },
   "homepage": "https://github.com/lrwp/www",
   "dependencies": {
-    "grunt": "^1.0.1"
+    "grunt": "^1.0.1",
+    "node-gandi": "^2.0.1"
   }
 }

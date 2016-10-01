@@ -19,7 +19,7 @@
         "title": {
             "type": "string",
             "required": true,
-            "description": "Thi is the headline for the news article, it will be displayed on the homepage.",
+            "description": "Headline for the news article, it will be displayed on the homepage."
         },
         "content": {
             "type": "string",
