@@ -159,6 +159,7 @@ $(function () {
                     $self.val(userCtx.name);
                 }
             },
+            published: SchemaHelper.defaults.date,
             created: SchemaHelper.defaults.date,
             start: SchemaHelper.defaults.date,
             end: SchemaHelper.defaults.date,
