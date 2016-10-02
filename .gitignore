@@ -1,4 +1,5 @@
 src/.couchapprc
+.couchrc
 *.swp
 *.swo
 build

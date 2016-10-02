@@ -6,7 +6,7 @@ function(newDoc, oldDoc, userCtx) {
         throw({forbidden : 'You must be logged in'});
     }
 
-    if (userCtx.roles.indexOf('_admin') !== -1) {
+    if (userCtx.roles.indexOf('_admin') !== -1 || userCtx.name === 'couchdb') {
         return;
     }
 

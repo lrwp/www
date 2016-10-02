@@ -1,0 +1,9 @@
+{
+  "options": {
+    "user": "couchdb",
+    "pass": "password"
+  },
+  "triton": {
+    "files": {}
+  }
+}
